@@ -1,0 +1,62 @@
+###############################################################################
+# Copyright 2017(c) The Ontario Institute for Cancer Research. All rights reserved.
+################################################################################
+# All Versions, Centralized for convenience.
+# Cloudera
+cloudera_major: 5
+cloudera_version: "{{ cloudera_major }}.3.9"
+cdh_version: "CDH{{ cloudera_major }}"
+cdh_version_number: "{{ cloudera_version }}"
+cm_version: "{{ cloudera_version }}"
+cm_api_version: 9
+
+# Jupyterhub User setup 
+jupyterhub_user: jupyterhub
+jupyterhub_group: jupyterhub
+jupyterhub_env: "jupyterhub"
+home: "/home/{{ jupyterhub_user }}"
+jupyterhub_config: "{{ home }}/jupyterhub_config.py"
+
+# Docker
+docker_image: jupyter/all-spark-notebook
+docker_group: docker
+
+# Anaconda
+anaconda_script: Anaconda3-5.0.1-Linux-x86_64.sh
+anaconda_url: "https://repo.continuum.io/archive/{{ anaconda_script }}"
+anaconda_installer: "{{ home }}/{{ anaconda_script }}"
+anaconda_path:  "{{ home }}/anaconda3/bin"
+anaconda_conda: "{{ anaconda_path }}/conda"
+anaconda_activate: "{{ anaconda_path }}/activate"
+
+sudospawner_path: "{{ anaconda_path}}/sudospawner" 
+
+anaconda_env: "{{ home }}/anaconda3/envs/{{ jupyterhub_env }}"
+
+oauthenticator_lib: "{{ home }}/anaconda3/lib/python3.6/site-packages/oauthenticator/"
+
+# Google Client Id  
+#oauth_client_id: ''      # set this from the secrets file 
+#oauth_client_secret: ''  # set this from the secrets file 
+
+# Daco
+#daco_base_url: '' # set this in the secrets file
+#daco_client_key: '' # set this in the secrets file
+#daco_client_secret: '' # set this in the secrets file
+#daco_token: '' # set this in the secrets file
+#daco_token_secret: '' # set this in the secrets file
+
+# Need to point external DNS to point this hostname 
+# to the floating ip address of our host 
+oauth_host: "jupyterhub.cancercollaboratory.org"
+oauth_port: 8000 
+oauth_callback_url: "https://{{ oauth_host }}:{{ oauth_port }}/hub/oauth_callback" 
+
+# SSL Client Certificate Information
+cert_countrycode: CA
+cert_province: Ontario
+cert_city: Toronto
+cert_org: Ontario Institute for Cancer Research
+cert_dept: DCC
+cert_hostname: "{{ oauth_host }}" 
+cert_email: kevin.hartmann@oicr.on.ca

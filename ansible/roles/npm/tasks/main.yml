@@ -1,0 +1,16 @@
+- name: Install npm 
+  become: true
+  become_user: root 
+  apt:
+    name: npm
+
+- name: Install nodejs 
+  become: true
+  become_user: root 
+  apt:
+    name: nodejs-legacy 
+
+- name: Install proxy for npm
+  become: true
+  become_user: root
+  command: npm install -g configurable-http-proxy

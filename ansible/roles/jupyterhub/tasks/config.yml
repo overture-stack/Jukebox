@@ -1,0 +1,48 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+- name: Generate jupyterhub configuration 
+  command: "{{ anaconda_path|quote }}/jupyterhub --generate-config c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'"
+  args: 
+    chdir: "{{ home }}"
+    creates: "{{ jupyterhub_config }}"
+
+- name: Generate SSL certificate
+  shell: "openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mykey.key -out mycert.pem < certificate_info" 
+  args:
+    chdir: "{{ home }}"
+    creates: "mykey.key"
+
+- name: Download docker image for dockerspawner
+  command: docker pull "{{ docker_image }}"
+
+- name: Edit jupyterhub configuration  
+  blockinfile:
+     path: "{{ jupyterhub_config }}"
+     block: |
+       c.JupyterHub.port = {{ oauth_port }}
+       c.JupyterHub.spawner_class = 'dockerspawner.DockerSpawner'
+       c.DockerSpawner.image = '{{ docker_image }}'
+       c.DockerSpawner.host_ip = '0.0.0.0'
+       from oauthenticator.google import GoogleOAuthenticator
+
+       c.JupyterHub.authenticator_class = GoogleOAuthenticator
+       c.GoogleOAuthenticator.oauth_callback_url = '{{ oauth_callback_url }}'
+       c.GoogleOAuthenticator.client_id = '{{ oauth_client_id }}'
+       c.GoogleOAuthenticator.client_secret = '{{ oauth_client_secret }}'
+
+       from oauthenticator.daco_client import DacoClient
+       from oauthenticator.daco import DacoOAuthenticator
+       c.DacoOAuthenticator.daco_base_url= '{{ daco_base_url }}'
+       c.DacoOAuthenticator.daco_client_key='{{ daco_client_key }}'
+       c.DacoOAuthenticator.daco_client_secret='{{ daco_client_secret }}'
+       c.DacoOAuthenticator.daco_token='{{ daco_token }}'
+       c.DacoOAuthenticator.daco_token_secret='{{ daco_token_secret }}'
+        
+       c.JupyterHub.authenticator_class = DacoOAuthenticator
+
+       c.JupyterHub.hub_ip = '{{ vars['ip_data']['floating_ip']['fixed_ip_address'] }}'
+       c.JupyterHub.ip = '{{ vars['ip_data']['floating_ip']['fixed_ip_address'] }}'
+       c.JupyterHub.admin_access = True
+       c.Authenticator.admin_users = {'{{ jupyterhub_user }}'}
+
+       c.JupyterHub.ssl_cert='mycert.pem'
+       c.JupyterHub.ssl_key='mykey.key'

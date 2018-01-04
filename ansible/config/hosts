@@ -1,0 +1,6 @@
+[jup]
+jupyter
+
+[jup:vars]
+ansible_python_interpeter=/usr/bin/python3
+host_ip=142.1.177.132

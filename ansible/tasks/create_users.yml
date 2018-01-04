@@ -1,0 +1,12 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+- name: Create users 
+  hosts: "{{ group }}" 
+  vars_files:
+    - "../vars/main.yml"
+    - "../group_vars/all/main.yml"
+    - "../vars/secrets.yml"
+  roles: 
+    - "../roles/users"
+  become: true
+  become_user: root
+

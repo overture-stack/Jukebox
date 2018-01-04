@@ -1,0 +1,24 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+- name: Create jupyterhub environment in anaconda 
+  shell: "{{ anaconda_path }}/conda create --name {{ jupyterhub_env }}"
+  args:
+    creates: "{{ anaconda_env }}" 
+  register: env
+
+- name: Install modules inside our environment with 'conda'
+  shell: "source {{ anaconda_activate }} {{ jupyterhub_env }} && {{ anaconda_conda }} install -y -q -c conda-forge jupyterhub notebook pip"
+  args:
+    executable: /bin/bash 
+  when: env.changed
+
+- name: Install modules inside our environment with 'pip' 
+  shell: "source {{ anaconda_activate }} {{ jupyterhub_env }} && {{ anaconda_path }}/pip install sudospawner dockerspawner oauthenticator requests_oauthlib"
+  args:
+    executable: /bin/bash
+  when: env.changed
+
+- name: Copy over info file that we use to generate our SSL certificate
+  template: 
+    src:  certificate_info 
+    dest: "{{ home }}/certificate_info" 
+    mode: 0664

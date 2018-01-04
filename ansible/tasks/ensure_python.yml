@@ -1,0 +1,21 @@
+# Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
+# Our debian installation has python3, not python2
+- name: Ensure we have python2 so we can run ansible modules 
+  gather_facts: no
+  become: yes
+  hosts: "{{ group }}"
+  vars_files:
+    - "../vars/main.yml"
+    - "../vars/secrets.yml"
+  tasks:
+    - ping:
+      register: ping 
+      ignore_errors: true
+
+    - name: "Update apt"
+      raw: sudo apt-get update
+      when: ping.failed
+
+    - name: "Install python"
+      raw: yes | sudo apt-get install python
+      when: ping.failed

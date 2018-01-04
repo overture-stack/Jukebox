@@ -1,0 +1,21 @@
+- name: Create jupyterhub service
+  become_user: root
+  become: true
+  template:
+    src: jupyterhub.service
+    dest: /etc/systemd/system/jupyterhub.service
+    owner: root
+    group: root
+    mode: 0664
+
+- name: Update services
+  become_user: root
+  become: true
+  shell: systemctl daemon-reload
+
+- name: Run jupyterhub service
+  become_user: root
+  become: true
+  service: 
+    name: jupyterhub
+    state: started

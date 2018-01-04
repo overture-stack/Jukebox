@@ -1,0 +1,14 @@
+- name: Set up anaconda environment with jupyterhub modules
+  import_tasks: install.yml
+
+- name: Install python modules for DACO authorization
+  import_tasks: daco.yml
+
+- name: Set up our permissions
+  import_tasks: permissions.yml
+
+- name: Create the configuration file from our template
+  import_tasks: config.yml
+
+- name: Run jupyterhub 
+  import_tasks: service.yml
