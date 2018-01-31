@@ -1,0 +1,16 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+
+#- name: Download docker image for dockerspawner
+#  command: docker pull "{{ docker_image }}"
+
+- name: Make docker directory
+  shell: "test -d {{ home }}/docker || mkdir {{ home }}/docker"
+
+- name: Copy over docker files 
+  copy: 
+    src: "docker/"
+    dest: "{{ home }}/docker/" 
+    mode: 0664
+    
+- name: Build docker image for dockerspawner to spawn when a notebook is run
+  command: "docker build -t {{ docker_image}}:latest {{ home }}/docker"

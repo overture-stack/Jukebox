@@ -8,6 +8,15 @@
     group: root
     mode: 0664
 
+- name: Copy over jupyterhub.sh 
+  become_user: jupyterhub 
+  become: true
+  template:
+    src: jupyterhub.sh
+    dest: "{{ home }}/bin/jupyterhub.sh"
+    owner: jupyterhub 
+    mode: 0755
+
 - name: Update services
   become_user: root
   become: true

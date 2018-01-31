@@ -1,24 +1,28 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
-- name: Create jupyterhub environment in anaconda 
-  shell: "{{ anaconda_path }}/conda create --name {{ jupyterhub_env }}"
-  args:
-    creates: "{{ anaconda_env }}" 
-  register: env
+- name: Create a virtual environment 
+  shell: "python3 -mvenv {{ home }}"
 
-- name: Install modules inside our environment with 'conda'
-  shell: "source {{ anaconda_activate }} {{ jupyterhub_env }} && {{ anaconda_conda }} install -y -q -c conda-forge jupyterhub notebook pip"
-  args:
-    executable: /bin/bash 
-  when: env.changed
+- name: Upgrade the version of pip inside the virtual environment 
+  shell: ". {{ home }}/bin/activate; pip install --upgrade pip" 
 
-- name: Install modules inside our environment with 'pip' 
-  shell: "source {{ anaconda_activate }} {{ jupyterhub_env }} && {{ anaconda_path }}/pip install sudospawner dockerspawner oauthenticator requests_oauthlib"
-  args:
-    executable: /bin/bash
-  when: env.changed
+- name: Install python packages into our virtual environment
+  shell: ". {{ home }}/bin/activate; pip install jupyter sudospawner dockerspawner oauthenticator requests_oauthlib overture-song icgc" 
+  
+- name: TODO... write proper installer for daco python files 
+  shell: /bin/true
+
+- name: Copy over python files that we use for daco to python lib dir 
+  copy: 
+    src:  "{{ item }}" 
+    dest: "{{ home }}/lib/python3.5/site-packages/oauthenticator/{{ item }}"
+    mode: 0664
+  with_items:
+    - daco.py
+    - daco_client.py
 
 - name: Copy over info file that we use to generate our SSL certificate
   template: 
     src:  certificate_info 
     dest: "{{ home }}/certificate_info" 
     mode: 0664
+

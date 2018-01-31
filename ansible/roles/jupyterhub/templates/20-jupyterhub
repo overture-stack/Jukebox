@@ -1,2 +1,2 @@
-{{ jupyterhub_user }} ALL=(%{{ jupyterhub_group }}) NOPASSWD:{{ sudospawner_path}}
-Defaults:{{jupyterhub_user}} secure_path+={{ anaconda_path }}
+{{ jupyterhub_user }} ALL=(%{{ jupyterhub_group }}) NOPASSWD:{{ home }}/bin/sudospawner
+Defaults:{{jupyterhub_user}} secure_path+={{ home }}/bin

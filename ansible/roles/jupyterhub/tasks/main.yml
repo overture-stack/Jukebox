@@ -1,5 +1,8 @@
-- name: Set up anaconda environment with jupyterhub modules
+- name: Set up python virtual environment will modules required for jupyterhub 
   import_tasks: install.yml
+
+- name: Fetch the jupyterhub docker image 
+  import_tasks: docker.yml
 
 - name: Install python modules for DACO authorization
   import_tasks: daco.yml

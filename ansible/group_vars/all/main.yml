@@ -16,24 +16,12 @@ jupyterhub_group: jupyterhub
 jupyterhub_env: "jupyterhub"
 home: "/home/{{ jupyterhub_user }}"
 jupyterhub_config: "{{ home }}/jupyterhub_config.py"
+jupyterhub_bin: "{{ home }}/bin"
 
 # Docker
-docker_image: jupyter/all-spark-notebook
+docker_image: icgc/spark-notebook
 docker_group: docker
-
-# Anaconda
-anaconda_script: Anaconda3-5.0.1-Linux-x86_64.sh
-anaconda_url: "https://repo.continuum.io/archive/{{ anaconda_script }}"
-anaconda_installer: "{{ home }}/{{ anaconda_script }}"
-anaconda_path:  "{{ home }}/anaconda3/bin"
-anaconda_conda: "{{ anaconda_path }}/conda"
-anaconda_activate: "{{ anaconda_path }}/activate"
-
-sudospawner_path: "{{ anaconda_path}}/sudospawner" 
-
-anaconda_env: "{{ home }}/anaconda3/envs/{{ jupyterhub_env }}"
-
-oauthenticator_lib: "{{ home }}/anaconda3/lib/python3.6/site-packages/oauthenticator/"
+oauthenticator_lib: "{{ home }}/lib/python3.5/site-packages/oauthenticator/"
 
 # Google Client Id  
 #oauth_client_id: ''      # set this from the secrets file 

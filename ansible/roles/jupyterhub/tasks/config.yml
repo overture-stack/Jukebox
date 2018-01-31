@@ -1,6 +1,6 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 - name: Generate jupyterhub configuration 
-  command: "{{ anaconda_path|quote }}/jupyterhub --generate-config c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'"
+  shell: ". {{ home }}/bin/activate; {{ home }}/bin/jupyterhub --generate-config c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'"
   args: 
     chdir: "{{ home }}"
     creates: "{{ jupyterhub_config }}"
@@ -10,9 +10,6 @@
   args:
     chdir: "{{ home }}"
     creates: "mykey.key"
-
-- name: Download docker image for dockerspawner
-  command: docker pull "{{ docker_image }}"
 
 - name: Edit jupyterhub configuration  
   blockinfile:

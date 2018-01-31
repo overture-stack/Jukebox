@@ -4,8 +4,8 @@ After=syslog.target network.target
 
 [Service]
 User={{ jupyterhub_user }}
-Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin: {{ anaconda_path}}"
-ExecStart={{ anaconda_path}}/jupyterhub
+Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:{{ home }}/bin"
+ExecStart={{ home }}/bin/jupyterhub
 WorkingDirectory={{ home }}
 
 [Install]

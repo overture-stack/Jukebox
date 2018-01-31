@@ -37,6 +37,6 @@ class DacoClient:
         request_url = urllib.parse.urljoin(self.base_url, 'search?entity-type=daco&entity-id={}&expand=details'.format(email))
         response = self.auth.get(request_url)
         if response.status_code == 200:
-            return json.loads(response.content)
+            return json.loads(response.content.decode('utf-8'))
         else:
             raise DacoException(response.status_code, 'Daco Error')

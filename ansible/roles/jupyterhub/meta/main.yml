@@ -1,4 +1,4 @@
 dependencies:
- - { role: anaconda }
+ - { role: pip }
  - { role: docker }
  - { role: npm }
