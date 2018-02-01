@@ -13,4 +13,9 @@
 - name: Install proxy for npm
   become: true
   become_user: root
-  command: npm install -g configurable-http-proxy
+  shell: npm install -g configurable-http-proxy
+
+- name: Assign capabilities to let npm run servers on ports less than 1024
+  become: true
+  become_user: root
+  shell: setcap cap_net_bind_service=+ep $(realpath $(which node)) 

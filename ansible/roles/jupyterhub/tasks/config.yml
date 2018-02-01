@@ -5,17 +5,11 @@
     chdir: "{{ home }}"
     creates: "{{ jupyterhub_config }}"
 
-- name: Generate SSL certificate
-  shell: "openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mykey.key -out mycert.pem < certificate_info" 
-  args:
-    chdir: "{{ home }}"
-    creates: "mykey.key"
-
 - name: Edit jupyterhub configuration  
   blockinfile:
      path: "{{ jupyterhub_config }}"
      block: |
-       c.JupyterHub.port = {{ oauth_port }}
+       c.JupyterHub.port = {{ jupyterhub_port }}
        c.JupyterHub.spawner_class = 'dockerspawner.DockerSpawner'
        c.DockerSpawner.image = '{{ docker_image }}'
        c.DockerSpawner.host_ip = '0.0.0.0'
@@ -41,5 +35,5 @@
        c.JupyterHub.admin_access = True
        c.Authenticator.admin_users = {'{{ jupyterhub_user }}'}
 
-       c.JupyterHub.ssl_cert='mycert.pem'
-       c.JupyterHub.ssl_key='mykey.key'
+       c.JupyterHub.ssl_cert='{{ certbot_cert }}'
+       c.JupyterHub.ssl_key='{{ certbot_key }}'

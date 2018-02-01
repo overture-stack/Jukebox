@@ -19,10 +19,3 @@
   with_items:
     - daco.py
     - daco_client.py
-
-- name: Copy over info file that we use to generate our SSL certificate
-  template: 
-    src:  certificate_info 
-    dest: "{{ home }}/certificate_info" 
-    mode: 0664
-

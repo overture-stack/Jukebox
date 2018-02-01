@@ -1,5 +1,5 @@
 ###############################################################################
-# Copyright 2017(c) The Ontario Institute for Cancer Research. All rights reserved.
+# Copyright 2017-2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 ################################################################################
 # All Versions, Centralized for convenience.
 # Cloudera
@@ -17,6 +17,7 @@ jupyterhub_env: "jupyterhub"
 home: "/home/{{ jupyterhub_user }}"
 jupyterhub_config: "{{ home }}/jupyterhub_config.py"
 jupyterhub_bin: "{{ home }}/bin"
+jupyterhub_port: 443
 
 # Docker
 docker_image: icgc/spark-notebook
@@ -37,14 +38,9 @@ oauthenticator_lib: "{{ home }}/lib/python3.5/site-packages/oauthenticator/"
 # Need to point external DNS to point this hostname 
 # to the floating ip address of our host 
 oauth_host: "jupyterhub.cancercollaboratory.org"
-oauth_port: 8000 
-oauth_callback_url: "https://{{ oauth_host }}:{{ oauth_port }}/hub/oauth_callback" 
+oauth_callback_url: "https://{{ oauth_host }}/hub/oauth_callback" 
 
 # SSL Client Certificate Information
-cert_countrycode: CA
-cert_province: Ontario
-cert_city: Toronto
-cert_org: Ontario Institute for Cancer Research
-cert_dept: DCC
-cert_hostname: "{{ oauth_host }}" 
-cert_email: kevin.hartmann@oicr.on.ca
+certbot_cert: /etc/letsencrypt/live/jupyterhub.cancercollaboratory.org/cert.pem
+certbot_key: /etc/letsencrypt/live/jupyterhub.cancercollaboratory.org/privkey.pem
+certbot_email: kevin.hartmann@oicr.on.ca

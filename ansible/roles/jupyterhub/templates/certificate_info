@@ -1,7 +1,0 @@
-{{ cert_countrycode }}
-{{ cert_province }}
-{{ cert_city }}
-{{ cert_org }}
-{{ cert_dept }}
-{{ cert_hostname }}
-{{ cert_email }}
