@@ -7,3 +7,23 @@
   with_items:
     - daco.py
     - daco_client.py
+- name: Copy over python files that we use for daco to python lib dir 
+  copy: 
+    src:  "{{ item }}" 
+    dest: "{{ home }}/lib/python3.5/site-packages/oauthenticator/{{ item }}"
+    mode: 0664
+  with_items:
+    - daco.py
+    - daco_client.py
+
+- name: Copy over our image file
+  copy:
+    src: "{{ item }}"
+    dest: "{{ home }}/icgc-logo.png"
+  with_items:
+    - icgc-logo.png
+
+- name: Copy over our icon file
+  copy:
+    src: "favicon.ico"
+    dest: "{{ home }}/share/jupyter/hub/static/favicon.ico"

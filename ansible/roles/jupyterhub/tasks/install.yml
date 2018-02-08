@@ -8,14 +8,3 @@
 - name: Install python packages into our virtual environment
   shell: ". {{ home }}/bin/activate; pip install jupyter sudospawner dockerspawner oauthenticator requests_oauthlib overture-song icgc" 
   
-- name: TODO... write proper installer for daco python files 
-  shell: /bin/true
-
-- name: Copy over python files that we use for daco to python lib dir 
-  copy: 
-    src:  "{{ item }}" 
-    dest: "{{ home }}/lib/python3.5/site-packages/oauthenticator/{{ item }}"
-    mode: 0664
-  with_items:
-    - daco.py
-    - daco_client.py

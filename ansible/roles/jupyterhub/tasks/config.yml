@@ -9,9 +9,10 @@
   blockinfile:
      path: "{{ jupyterhub_config }}"
      block: |
+       c.JupyterHub.logo_file = "{{ home }}/icgc-logo.png"
        c.JupyterHub.port = {{ jupyterhub_port }}
        c.JupyterHub.spawner_class = 'dockerspawner.DockerSpawner'
-       c.DockerSpawner.image = '{{ docker_image }}'
+       c.DockerSpawner.image = '{{ docker_image }}:latest'
        c.DockerSpawner.host_ip = '0.0.0.0'
        from oauthenticator.google import GoogleOAuthenticator
 

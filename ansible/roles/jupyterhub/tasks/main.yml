@@ -1,13 +1,10 @@
 - name: Set up python virtual environment will modules required for jupyterhub 
   import_tasks: install.yml
 
-- name: Fetch the jupyterhub docker image 
-  import_tasks: docker.yml
-
 - name: Install python modules for DACO authorization
   import_tasks: daco.yml
 
-- name: Set up our permissions
+- name: Set up sudo permissions for dockerspawner
   import_tasks: permissions.yml
 
 - name: Create the configuration file from our template

@@ -1,42 +1,5 @@
-- name: get release
-  shell: lsb_release -cs
-  register: release
+- name: Install dockerhub 
+  import_tasks: install.yml
 
-- name: Remove old docker packages
-  become: true
-  become_user: root
-  apt: 
-    name: "{{ item }}"
-    state: absent 
-  with_items: 
-    - docker
-    - docker-engine
-    - docker.io
-
-- name: Add docker signing dependencies 
-  become: true
-  become_user: root
-  apt: 
-    name: "{{ item }}"
-  with_items: [ apt-transport-https, ca-certificates, software-properties-common ]
-
-- name: Add repository signing key
-  become: true
-  become_user: root
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-
-- name: Add docker repository to apt
-  become: true
-  become_user: root
-  apt_repository:
-    repo: "deb https://download.docker.com/linux/ubuntu {{ release.stdout }} stable"
-    state: present
-
-- name: Install docker
-  become: true
-  become_user: root 
-  apt:
-    update_cache: yes 
-    name: docker-ce
+- name: Build the dockerhub image 
+  import_tasks: build.yml
