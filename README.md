@@ -25,8 +25,7 @@ The ICGC Jupyter Notebooks are only intended as a "sandbox" environment;  a plac
 The site is designed as a starting point for researchers to test out proofs of concept, and explore ideas, and get to know aspects of our systems and APIs, but not as a computation-heavy platform for bioinformatics research. 
 
 It is also not, in any way, intended to be a persistent, robust, or production-ready environment. There are no guarantees of availability or persistence at any given point in time. 
-
-##In particular, please note that all Jupyter notebook acounts and configurations will be automatically deleted on a weekly basis.
+## In particular, please note that all Jupyter notebook acounts and configurations will be automatically deleted on a weekly basis.
 
 Users should be aware they will need to download and save copies of any notebooks they wish to keep onto their own computers, and upload them back again whenever necessary.
 
