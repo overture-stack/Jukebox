@@ -10,7 +10,7 @@ Be sure to check out our demonstration notebook to see how easy it is to get sta
 
 # What do I need to get started?
 
-You need DACO authorization and a google email address -- use the same one that you use to sign in to our web <portal> to sign in.
+You need DACO authorization and a google email address -- use the same one that you use to sign in to our web portal to sign in.
 
 Once you do, you will have access to your own private sandbox in which you can write scripts and demonstrate results in Python or R.
 
