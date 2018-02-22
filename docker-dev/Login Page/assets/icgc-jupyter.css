@@ -1,0 +1,16 @@
+.jupyterhub-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.jupyterhub-logo a {
+  align-self: center;
+}
+
+.logo-text {
+  vertical-align: middle;
+  align-self: center;
+  margin-top: 6px;
+  font-weight: bold;
+  padding-left: 10px;
+}
