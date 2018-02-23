@@ -6,7 +6,29 @@ body {
   font-weight: normal;
 }
 
-#login-main {
+.navbar {
+  margin: 0;
+}
+
+.jupyterhub-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.jupyterhub-logo a {
+  align-self: center;
+}
+
+.logo-text {
+  vertical-align: middle;
+  align-self: center;
+  margin-top: 6px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+#login-main,
+.bkg-container {
   display: flex;
   align-items: center;
   justify-content: center;
