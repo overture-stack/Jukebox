@@ -31,9 +31,13 @@ btn_label = btn_label or title %}
 
   <title>{% block title %}JupyterHub{% endblock %}</title>
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% block stylesheet %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  {% block stylesheet %}
   <link rel="stylesheet" href="{{ static_url("css/style.min.css") }}" type="text/css" />
-  <link rel="stylesheet" href="{{ static_url("css/icgc-jupyter.css") }}" type="text/css" /> {% endblock %}
+  <link rel="stylesheet" href="{{ static_url("css/icgc-jupyter.css") }}" type="text/css" />
+  {% endblock %}
+  
   <script src="{{static_url("components/requirejs/require.js ") }}" type="text/javascript" charset="utf-8"></script>
   <script src="{{static_url("components/jquery/dist/jquery.min.js ") }}" type="text/javascript" charset="utf-8"></script>
   <script src="{{static_url("components/bootstrap/dist/js/bootstrap.min.js ") }}" type="text/javascript" charset="utf-8"></script>
