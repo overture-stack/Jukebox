@@ -8,4 +8,32 @@
     mode: 0755
   with_items:
     - page.html
+    - login.html
     - home.html
+
+- name: Copy over new css
+  become_user: jupyterhub 
+  become: true
+  copy:
+    src: "{{ item }}" 
+    dest: "{{ home }}/share/jupyter/hub/static/css/{{ item }}"
+    owner: jupyterhub 
+    mode: 0755
+  with_items:
+    - icgc-jupyter.css
+
+- name: Copy over image assets
+  become_user: jupyterhub 
+  become: true
+  copy:
+    src: "{{ item }}" 
+    dest: "{{ home }}/share/jupyter/hub/static/images/icgc/{{ item }}"
+    owner: jupyterhub 
+    mode: 0755
+  with_items:
+    - icgc-jupyter.css
+    - background-explore-ICGC.jpg
+    - icon-google.svg
+    - logo-icgc-jupyter-notebooks.svg
+    - logo-jupyterhub.svg
+    - logo-poweredby-cancer-collaborator.svg
