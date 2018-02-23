@@ -22,6 +22,11 @@
   with_items:
     - icgc-jupyter.css
 
+- name: ensure icgc images directory exists
+  file:
+    path: "{{ home }}/share/jupyter/hub/static/images/icgc"
+    state: directory
+
 - name: Copy over image assets
   become_user: jupyterhub 
   become: true
