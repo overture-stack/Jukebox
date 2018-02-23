@@ -86,6 +86,10 @@ body {
   margin: 0 0 1em;
 }
 
+.service-login .body p a {
+  color: #1693c0;
+}
+
 .service-login .body .btn {
   font-size: 0.875em;
   font-weight: 600;
