@@ -1,7 +1,7 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 
 - name: Make docker & secrets directory
-  shell: "test -d {{ home }}/docker/secrets || mkdir -p {{ home }}/docker/secrets"
+  shell: "test -d {{ home }}/secrets || mkdir -p {{ home }}/secrets"
 
 - name: Copy over docker files 
   copy: 
@@ -11,10 +11,10 @@
 - name: Copy over our oauth secrets template into the secrets directory
   template: 
     src: oauth.env
-    dest: "{{ home }}/docker/hub/oauth.env"
+    dest: "{{ home }}/secrets/jupyterhub_oauth.env"
     owner: "{{ jupyterhub_user }}"
 
-- name: Copy over our environments template file to .env 
+- name: Copy over our environments template file to docker/hub 
   template: 
     src: environment
     dest: "{{ home }}/docker/hub/"
@@ -28,7 +28,7 @@
 - name: Copy our certbot files into our secrets directory
   become: true
   become_user: "{{ jupyterhub_user }}"
-  shell: "cp {{ certbot_cert }} {{ certbot_key }} {{ home }}/docker/secrets/"
+  shell: "cp {{ certbot_cert }} {{ certbot_key }} {{ home }}/secrets/"
 
 - name: Set permissions on our build file
   shell: chmod 755 "{{ home }}/docker/build.sh"

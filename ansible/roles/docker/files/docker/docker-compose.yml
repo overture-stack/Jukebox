@@ -36,7 +36,7 @@ services:
       DEV_MODE: ${DEV_MODE}
       PORT: ${PORT}
     env_file:
-      - hub/oauth.env
+      - ~/secrets/jupyterhub_oauth.env
       - hub/environment
     command: >
       jupyterhub -f /srv/jupyterhub/jupyterhub_config.py

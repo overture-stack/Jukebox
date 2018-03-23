@@ -16,7 +16,8 @@ TEMPLATE_DIR=$DIR/www_custom/hub/templates/
 COPY ./auth_daco/* $PYTHON_LIB/oauthenticator/
 
 # Copy in our SSL certificate files
-COPY ./secrets/* $DIR/secrets/
+COPY ~/secrets/cert.pem $SSL_CERT
+COPY ~/secrets/privkey.pem $SSL_KEY
 
 RUN chmod 700 $DIR/secrets && \
     chmod 600 $DIR/secrets/*
