@@ -14,13 +14,19 @@ cm_api_version: 9
 jupyterhub_user: jupyterhub
 jupyterhub_group: jupyterhub
 jupyterhub_env: "jupyterhub"
+jupyterhub_service: "{{ jupyterhub_user }}"
 home: "/home/{{ jupyterhub_user }}"
-jupyterhub_config: "{{ home }}/jupyterhub_config.py"
 jupyterhub_bin: "{{ home }}/bin"
-jupyterhub_port: 443
+
+# Jupyterhub Service configuration
+jupyterhub_host: "jupyterhub.cancercollaboratory.org"
+jupyterhub_port: 443 
+
+# Docker task currently symlinks these from the certbot files defined below
+key_file: "secrets/privkey.pem"
+cert_file: "secrets/cert.pem"
 
 # Docker
-docker_image: icgc/spark-notebook
 docker_group: docker
 oauthenticator_lib: "{{ home }}/lib/python3.5/site-packages/oauthenticator/"
 
@@ -37,8 +43,7 @@ oauthenticator_lib: "{{ home }}/lib/python3.5/site-packages/oauthenticator/"
 
 # Need to point external DNS to point this hostname 
 # to the floating ip address of our host 
-oauth_host: "jupyterhub.cancercollaboratory.org"
-oauth_callback_url: "https://{{ oauth_host }}/hub/oauth_callback" 
+oauth_callback_url: "https://{{ jupyterhub_host }}:{{ jupyterhub_port }}/hub/oauth_callback" 
 
 # SSL Client Certificate Information
 certbot_cert: /etc/letsencrypt/live/jupyterhub.cancercollaboratory.org/cert.pem

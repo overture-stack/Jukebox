@@ -7,6 +7,7 @@
     - "../vars/secrets.yml"
   roles: 
     - "../roles/users"
+    - "../roles/certbot"
   become: true
   become_user: root
 

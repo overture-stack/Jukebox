@@ -1,3 +1,3 @@
 #!/bin/bash
-. {{ home }}/bin/activate
-{{ home }}/bin/jupyterhub 
+cd {{ home }}/docker
+docker-compose up

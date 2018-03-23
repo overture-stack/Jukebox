@@ -1,13 +1,38 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 
-- name: Make docker directory
-  shell: "test -d {{ home }}/docker || mkdir {{ home }}/docker"
+- name: Make docker & secrets directory
+  shell: "test -d {{ home }}/docker/secrets || mkdir -p {{ home }}/docker/secrets"
 
 - name: Copy over docker files 
   copy: 
     src: "docker/"
     dest: "{{ home }}/docker/" 
-    mode: 0664
-    
-- name: Build docker image for dockerspawner to spawn when a notebook is run
-  command: "docker build -t {{ docker_image }}:latest {{ home }}/docker"
+
+- name: Copy over our oauth secrets template into the secrets directory
+  template: 
+    src: oauth.env
+    dest: "{{ home }}/docker/hub/oauth.env"
+    owner: "{{ jupyterhub_user }}"
+
+- name: Copy over our environments template file to .env 
+  template: 
+    src: environment
+    dest: "{{ home }}/docker/hub/"
+    owner: "{{ jupyterhub_user }}"
+
+- name: Link our environment variables file in docker/hub into .env in docker/
+  become: true
+  become_user: "{{ jupyterhub_user }}"
+  shell: "[ -e {{home}}/docker/.env ] && rm {{ home }}/docker/.env; ln -s {{ home}}/docker/hub/environment {{ home }}/docker/.env"
+
+- name: Copy our certbot files into our secrets directory
+  become: true
+  become_user: "{{ jupyterhub_user }}"
+  shell: "cp {{ certbot_cert }} {{ certbot_key }} {{ home }}/docker/secrets/"
+
+- name: Set permissions on our build file
+  shell: chmod 755 "{{ home }}/docker/build.sh"
+
+- name: Build docker image 
+  command: "{{ home }}/docker/build.sh"
+
