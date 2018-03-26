@@ -20,5 +20,4 @@ docker build -t ${LOCAL_NOTEBOOK_IMAGE} . -f Dockerfile.notebook
 # Just running a shell with the volume mounted copies the mounted directory to
 docker run -v "${OPT_VOLUME}:/opt" create-volume /bin/bash 
 
-
 echo "To start/stop the jupyterhub service, run docker-compose up/down"

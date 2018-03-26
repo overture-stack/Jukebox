@@ -15,13 +15,6 @@ TEMPLATE_DIR=$DIR/www_custom/hub/templates/
 # Copy in our daco authentication code over into the oauthenticator module 
 COPY ./auth_daco/* $PYTHON_LIB/oauthenticator/
 
-# Copy in our SSL certificate files
-COPY ~/secrets/cert.pem $SSL_CERT
-COPY ~/secrets/privkey.pem $SSL_KEY
-
-RUN chmod 700 $DIR/secrets && \
-    chmod 600 $DIR/secrets/*
-
 # symbolic link to the web page customization section of the juptyterhub module 
 RUN ln -s $HUB_DIR $DIR/www
 

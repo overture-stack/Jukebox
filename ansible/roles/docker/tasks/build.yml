@@ -1,7 +1,10 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 
-- name: Make docker & secrets directory
-  shell: "test -d {{ home }}/secrets || mkdir -p {{ home }}/secrets"
+- name: Make docker & ssl secrets directory
+  shell: "test -d {{ home }}/secrets/ssl || mkdir -p {{ home }}/secrets/ssl"
+
+- name: Make docker & ssl config directory
+  shell: "test -d {{ home }}/config || mkdir -p {{ home }}/config/"
 
 - name: Copy over docker files 
   copy: 
@@ -10,29 +13,28 @@
 
 - name: Copy over our oauth secrets template into the secrets directory
   template: 
-    src: oauth.env
+    src: jupyterhub_oauth.env
     dest: "{{ home }}/secrets/jupyterhub_oauth.env"
     owner: "{{ jupyterhub_user }}"
 
 - name: Copy over our environments template file to docker/hub 
   template: 
-    src: environment
-    dest: "{{ home }}/docker/hub/"
+    src: jupyterhub.env 
+    dest: "{{ home }}/config/jupyterhub.env"
     owner: "{{ jupyterhub_user }}"
 
-- name: Link our environment variables file in docker/hub into .env in docker/
+- name: Copy our certbot cert into our secrets directory
   become: true
   become_user: "{{ jupyterhub_user }}"
-  shell: "[ -e {{home}}/docker/.env ] && rm {{ home }}/docker/.env; ln -s {{ home}}/docker/hub/environment {{ home }}/docker/.env"
+  shell: "cp {{ certbot_cert }} {{ home }}/secrets/ssl/"
 
-- name: Copy our certbot files into our secrets directory
+- name: Copy our certbot key into our secrets directory
   become: true
   become_user: "{{ jupyterhub_user }}"
-  shell: "cp {{ certbot_cert }} {{ certbot_key }} {{ home }}/secrets/"
+  shell: "cp {{ certbot_key }} {{ home }}/secrets/ssl/" 
 
 - name: Set permissions on our build file
   shell: chmod 755 "{{ home }}/docker/build.sh"
 
 - name: Build docker image 
   command: "{{ home }}/docker/build.sh"
-

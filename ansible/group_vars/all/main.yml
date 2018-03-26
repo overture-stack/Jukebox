@@ -9,6 +9,7 @@ cdh_version: "CDH{{ cloudera_major }}"
 cdh_version_number: "{{ cloudera_version }}"
 cm_version: "{{ cloudera_version }}"
 cm_api_version: 9
+openstack_security_groups: "Monitoring, jupyterhub"  
 
 # Jupyterhub User setup 
 jupyterhub_user: jupyterhub
@@ -22,9 +23,12 @@ jupyterhub_bin: "{{ home }}/bin"
 jupyterhub_host: "jupyterhub.cancercollaboratory.org"
 jupyterhub_port: 443 
 
+# Location of Jupyterhub service inside Docker
+service_dir: "/srv/jupyterhub/"
+
 # Docker task currently symlinks these from the certbot files defined below
-key_file: "secrets/privkey.pem"
-cert_file: "secrets/cert.pem"
+key_file: "~/secrets/ssl/privkey.pem"
+cert_file: "~/secrets/ssl/cert.pem"
 
 # Docker
 docker_group: docker
