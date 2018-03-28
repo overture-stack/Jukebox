@@ -23,7 +23,8 @@
   become: true
   become_user: root
   shell: "certbot certonly -d jupyterhub.cancercollaboratory.org --agree-tos --email {{ certbot_email }} --standalone -q"
-  creates: "{{ certbot_cert }}" 
+  args:
+    creates: "{{ certbot_cert }}" 
 
 - name: Grant jupyterhub group permission to find the certs
   become: true

@@ -1,14 +1,30 @@
-- name: Set up python virtual environment will modules required for jupyterhub 
-  import_tasks: install.yml
+- name: Create jupyterhub service
+  become_user: root
+  become: true
+  template:
+    src: jupyterhub.service
+    dest: "/etc/systemd/system/{{ jupyterhub_service }}.service"
+    owner: root
+    group: root
+    mode: 0664
 
-- name: Install python modules for DACO authorization
-  import_tasks: daco.yml
+- name: Copy over jupyterhub.sh 
+  become_user: "{{ jupyterhub_user }}" 
+  become: true
+  template:
+    src: jupyterhub.sh
+    dest: "{{ home }}/jupyterhub.sh"
+    owner: "{{ jupyterhub_user }}" 
+    mode: 0755
 
-- name: Set up sudo permissions for dockerspawner
-  import_tasks: permissions.yml
+- name: Update services
+  become_user: root
+  become: true
+  shell: systemctl daemon-reload
 
-- name: Create the configuration file from our template
-  import_tasks: config.yml
-
-- name: Run jupyterhub 
-  import_tasks: service.yml
+- name: Run jupyterhub service
+  become_user: root
+  become: true
+  service: 
+    name: "{{ jupyterhub_service }}"
+    state: started
