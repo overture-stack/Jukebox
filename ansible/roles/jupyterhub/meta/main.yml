@@ -1,5 +1,0 @@
-dependencies:
- - { role: pip }
- - { role: docker }
- - { role: npm }
- - { role: certbot }

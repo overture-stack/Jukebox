@@ -1,8 +1,8 @@
 # What is ICGC's Jupyter Notebooks site?
 
-It's a place where you can get started running our APIs and data, using only your web browsr! 
+It's a place where you can get started running our APIs and data, using only your web browser! 
 
-Just navigate to [https://jupyterhub.cancercollaboratory.org](), log in, and get started! Everything you run is contained within your own virtual machine, so you can't break anything; so feel free to experiment, learn, and explore!
+Just navigate to [https://jupyterhub.cancercollaboratory.org](https://jupyterhub.cancercollaboratory.org), log in, and get started! Everything you run is contained within your own virtual machine, so you can't break anything; so feel free to experiment, learn, and explore!
 
 Once there, you can fetch data, run analyses using R and Python, and chart real world results. 
 
@@ -37,4 +37,4 @@ Jupyter Notebooks are great for getting started; but what do you do once you nee
 
 Don't worry! That's exactly what our Cancer Genome Collaboratory system was designed for; it's a distributed computing powerhouse with over 2,500 CPU cores, 7.7 PB of storage, and over 900 TB of cancer genomics data!
 
-Check it out at [https:// cancercollaboratory.org]() 
+Check it out at [https://cancercollaboratory.org](https://cancercollaboratory.org) 

@@ -3,10 +3,11 @@
   hosts: "{{ group }}" 
   vars_files:
     - "../vars/main.yml"
+    - "{{ secrets_file }}"
     - "../group_vars/all/main.yml"
-    - "../vars/secrets.yml"
   roles: 
-    - "../roles/icgc-jupyterhub"
+    - "../roles/docker"
+    - "../roles/jupyterhub"
   become: true
   become_user: "{{ jupyterhub_user }}"
 

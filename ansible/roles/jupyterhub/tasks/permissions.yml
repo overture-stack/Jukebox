@@ -1,4 +1,0 @@
-- name: Add jupyterhub user to sudo list; limited to sudospawner
-  become_user: root
-  become: true
-  template: dest=/etc/sudoers.d/20-jupyterhub src=20-jupyterhub

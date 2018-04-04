@@ -1,6 +1,4 @@
 # How to set up Jupyterhub on Collaboratory (using ansible)
-1. Open a terminal window. Use **cd** to go into the same directory where you found this README file.
-1. Type **cd** var 
 1. Create a secrets.yml file with the following fields filled in with valid authentication credentials.
 
 ```    
@@ -40,5 +38,8 @@ keypair_name: <keypair name>
 # openstack login_username field.
 openstack_ssh_user: <ssh user >
 ```
+2. Open a terminal window. Use **cd** to go into the same directory where you found this README file.
+
+3. Type *cd var*, and edit the main.yml. Change the setting of the 'secrets_file' to match the pathname of the secrets file you just created.  
 
 Lastly, go back to the same directory that this file is in, and type '**ansible playbook -i config/hosts jupyter.yml**'

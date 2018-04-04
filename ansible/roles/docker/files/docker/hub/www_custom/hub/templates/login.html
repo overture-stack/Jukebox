@@ -1,0 +1,41 @@
+{% extends "page.html" %} {% block login_widget %} {% endblock %} {% block main %}
+
+<style>
+    .navbar {
+        display: none;
+    }
+</style>
+
+{% block login %}
+<div id="login-main" class="container">
+    <div class="service-login">
+        <div class="header">
+            <a href="https://jupyterhub.cancercollaboratory.org/hub/">
+                <img src="{{ static_url("images/icgc/logo-icgc-jupyter-notebooks.svg") }}" width="520" alt="ICGC JupyterHub Logo" class="icgc-jupyter-logo">
+            </a>
+        </div>
+        <div class="body">
+            <h2>Sign in and start exploring</h2>
+            <p>Users with
+                <a href="http://icgc.org/index.php?q=daco" target="_blank">DACO approval</a> can programmatically interact with, analyze, and visualize ICGC data.</p>
+            <a role="button" class="btn btn-jupyter btn-lg" href='{{authenticator_login_url}}'>
+                <div class="google-btn-wrapper">
+                    <i class="google-login-icon"></i>
+                    <span>Sign in with Google</span>
+                </div>
+            </a>
+        </div>
+        <div class="footer">
+            <img src="{{ static_url("images/icgc/logo-jupyterhub.svg") }}" width="145" alt="JupyterHub Logo">
+            <img src="{{ static_url("images/icgc/logo-poweredby-cancer-collaborator.svg") }}" width="146" alt="ICGC Logo">
+        </div>
+    </div>
+</div>
+{% endblock login %} {% endblock %} {% block script %} {{ super() }}
+<script>
+    if (window.location.protocol === "http:") {
+        // unhide http warning
+        var warning = document.getElementById('insecure-login-warning');
+        warning.className = warning.className.replace(/\bhidden\b/, '');
+    }
+</script> {% endblock %}
