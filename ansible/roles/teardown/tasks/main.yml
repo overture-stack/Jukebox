@@ -1,0 +1,18 @@
+# Destroy our VM instance 
+# the instance
+- name: Tearing down Virtual Machine
+  os_server:
+    state: absent 
+    auth:
+      auth_url: "{{ auth_url }}"
+      username: "{{ login_username }}"
+      password: "{{ login_password }}"
+      project_name: "{{ login_project_name }}"
+      domain_name: "default"
+    name: "{{ inventory_hostname }}"
+    key_name: "{{ keypair_name }}"
+    meta:
+      hostname: "{{ inventory_hostname }}"
+      group: ansible
+    timeout: 30
+  delegate_to: localhost

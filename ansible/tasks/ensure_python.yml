@@ -11,6 +11,7 @@
     - ping:
       register: ping 
       ignore_errors: true
+      remote_user: "{{ ansible_ssh_user }}"
 
     - name: "Update apt"
       raw: sudo apt-get update

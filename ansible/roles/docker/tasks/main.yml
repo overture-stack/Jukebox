@@ -1,5 +1,12 @@
-- name: Install dockerhub 
-  import_tasks: install.yml
+#- name: Install dockerhub 
+#  import_tasks: install.yml
+#  when: host != "localhost"
 
-- name: Build the dockerhub image 
-  import_tasks: build.yml
+#- name: Build the dockerhub image 
+#  import_tasks: build.yml
+#  when: host != "localhost"
+
+- name: Run docker build locally
+  import_tasks: local.yml
+  connection: local
+  when: isLocal 

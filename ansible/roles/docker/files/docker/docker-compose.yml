@@ -13,8 +13,8 @@ services:
         JUPYTERHUB_VERSION: ${JUPYTERHUB_VERSION}
         DEV_MODE: ${DEV_MODE}
     restart: always
-    image: jupyterhub-docker
-    container_name: jd
+    image: ${DOCKER_NOTEBOOK_IMAGE}
+    container_name: ${CONTAINER_NAME}
     volumes:
       # Bind Docker socket on the host so we can connect to the daemon from
       # within the container
@@ -27,7 +27,7 @@ services:
       - "${PORT}:${PORT}"
     environment:
       # All containers will join this network
-      DOCKER_NETWORK_NAME: jupyterhub-network 
+      DOCKER_NETWORK_NAME: ${DOCKER_NETWORK_NAME}
       # JupyterHub will spawn this Notebook image for users
       DOCKER_NOTEBOOK_IMAGE: ${LOCAL_NOTEBOOK_IMAGE}
       # Notebook directory inside user image
@@ -38,7 +38,6 @@ services:
       PORT: ${PORT}
     env_file:
       - ~/secrets/jupyterhub_oauth.env
-      - ~/config/jupyterhub.env
     command: >
       jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
 

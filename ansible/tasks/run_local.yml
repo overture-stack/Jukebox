@@ -1,12 +1,9 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
-- name: Create users 
+- name: Setup jupyterhub for localhost 
   hosts: "{{ group }}" 
   vars_files:
     - "../vars/main.yml"
     - "{{ secrets_file }}"
   roles: 
-    - "../roles/users"
-    - "../roles/certbot"
-  become: true
-  become_user: root
-
+    - "../roles/docker"
+  connection: local

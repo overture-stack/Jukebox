@@ -1,0 +1,12 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+
+- name: Sets up the ssh known hosts appropriately so we don't get prompted when we run this ansible playbook interactively 
+  hosts: "{{ group }}"
+  user: root
+  gather_facts: no
+  serial: 1
+  vars_files:
+    - "../vars/main.yml"
+    - "{{ secrets_file }}"
+  roles:
+    - ../roles/ssh_hostname

@@ -40,16 +40,10 @@
     wait: yes
   delegate_to: localhost
   register: ip_data
+  when: creation_data.changed
 
 - name: Pause to allow ssh server time to start
   shell: sleep 45 
   delegate_to: localhost
   when: creation_data.changed
-
-#- debug: msg="{{ip_data}}"
-
-- name: Update local host with ip address of new openstack instance
-  shell: 'echo "{{ ip_data.floating_ip.floating_ip_address }} \t {{ inventory_hostname }}" >> /etc/hosts' 
-  delegate_to: localhost
-
 
