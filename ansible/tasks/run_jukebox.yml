@@ -1,11 +1,14 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
-- name: Setup Jukebox on localhost 
+- name: Deploy and Install Jukebox Service 
   hosts: "{{ group }}" 
   vars_files:
     - "../vars/main.yml"
-    - "../vars/local.yml"
-    - "../vars/jukebox.yml"
     - "../vars/docker.yml"
+    - "../vars/jukebox.yml"
+    - "../vars/deploy.yml"
+    - "{{ oauth_secrets }}"
   roles: 
     - "../roles/docker"
-  connection: local
+    - "../roles/jukebox"
+  become: true
+  become_user: "{{ jukebox_user }}"

@@ -1,0 +1,20 @@
+# Where to install files with secret information 
+secrets_dir: "{{ home }}/secrets"
+
+# Where to put install the SSL certificates for the site 
+ssl_dir: "{{ secrets_dir }}/ssl"
+
+# Where to put the Jukebox environment variables file 
+config_dir:  "{{ home }}/config"
+jukebox_env: "{{ config_dir }}/jukebox.env"
+oauth_env: "{{ secrets_dir }}/oauth.env"
+
+# The shared directory to mount to transfer files into/out of the JupyterHub
+# container when customizing the look & feel  
+share_dir: "{{ home }}/share"
+
+# Where to put the files for the docker build
+build_dir: "{{ home }}/build"
+
+# Where to put the shell scripts & docker-compose file 
+run_dir: "{{ home }}/bin"

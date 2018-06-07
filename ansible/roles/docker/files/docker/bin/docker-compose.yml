@@ -7,7 +7,7 @@ version: "2"
 services:
   hub:
     build:
-      context: hub
+      context: ${BUILD_DIR}/hub
       dockerfile: Dockerfile.custom
       args:
         JUPYTERHUB_VERSION: ${JUPYTERHUB_VERSION}
@@ -21,8 +21,8 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:rw"
       # Bind Docker volume on host for JupyterHub database and cookie secrets
       - "data:${DATA_MOUNT_POINT}"
-      - "./share:/srv/jupyterhub/share"
-      - "~/secrets/ssl:/srv/jupyterhub/secrets"
+      - "${SHARE_DIR}:/srv/jukebox.share"
+      - "${SSL_DIR}:/srv/jupyterhub/secrets"
     ports:
       - "${PORT}:${PORT}"
     environment:
@@ -37,7 +37,7 @@ services:
       DEV_MODE: ${DEV_MODE}
       PORT: ${PORT}
     env_file:
-      - ~/secrets/jupyterhub_oauth.env
+      - ${OAUTH_ENV}
     command: >
       jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
 

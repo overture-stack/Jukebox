@@ -1,9 +1,8 @@
 #!/bin/bash
 set -x 
 
-here=$(dirname $0)
-cd $here
-. ~/config/jupyterhub.env
+. {{ jukebox_env }}
+cd ${BUILD_DIR}
 
 docker network inspect ${DOCKER_NETWORK_NAME} >/dev/null 2>&1 || docker network create ${DOCKER_NETWORK_NAME}
 
@@ -20,4 +19,4 @@ docker build -t ${LOCAL_NOTEBOOK_IMAGE} . -f Dockerfile.notebook
 # Run bash so that the mount will copy the mount directory into the volume 
 docker run -v "${OPT_VOLUME}:/opt" ${CREATE_VOLUME_IMAGE} /bin/bash 
 
-echo "To start/stop the jupyterhub service, run docker-compose up/down"
+echo "To start/stop the jukebox.service, run docker-compose up/down"

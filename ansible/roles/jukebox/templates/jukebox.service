@@ -3,9 +3,9 @@ Description=Jupyterhub
 After=syslog.target network.target
 
 [Service]
-User={{ jupyterhub_user }}
+User={{ jukebox_user }}
 Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:{{ home }}/bin"
-ExecStart={{ home }}/jupyterhub.sh
+ExecStart={{ home }}/jukebox.sh
 WorkingDirectory={{ home }}
 
 [Install]

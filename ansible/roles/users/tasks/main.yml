@@ -1,9 +1,9 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
-- name: Create jupyterhub group
+- name: Create jukebox group
   become_user: root
   become: true
   group: 
-    name: "{{ jupyterhub_group }}" 
+    name: "{{ jukebox_group }}" 
 
 - name: Create docker group
   become_user: root
@@ -11,9 +11,9 @@
   group: 
     name: "{{ docker_group }}" 
 
-- name: Create jupyterhub user 
+- name: Create jukebox user 
   become_user: root
   become: true
   user: 
-    name: "{{ jupyterhub_user }}"
-    groups: "{{ jupyterhub_group }}, {{docker_group}}" 
+    name: "{{ jukebox_user }}"
+    groups: "{{ jukebox_group }}, {{docker_group}}" 

@@ -1,42 +1,80 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 
-- name: Make docker & ssl secrets directory
-  shell: "test -d {{ home }}/secrets/ssl || mkdir -p {{ home }}/secrets/ssl"
+- name: "Make secrets directory: {{ ssl_dir }}"
+  shell: "test -d {{ ssl_dir }} || mkdir -p {{ ssl_dir }}"
 
-- name: Make docker & ssl config directory
-  shell: "test -d {{ home }}/config || mkdir -p {{ home }}/config/"
+- name: "Make config directory: '{{ config_dir }}'"
+  shell: "test -d {{ config_dir }} || mkdir -p {{ config_dir }}"
 
 - name: Copy over docker files 
   copy: 
     src: "docker/"
-    dest: "{{ home }}/docker/" 
+    dest: "{{ home }}" 
+
+- name: "Make share directory: '{{ share_dir }}'"
+  shell: "test -d {{ share_dir }} || mkdir -p {{ share_dir }}"
+
+#- name: "Copy over docker files to build directory: '{{ build_dir }}'" 
+#  copy: 
+#    src: "docker/build"
+#    dest: "{{ build_dir }}" 
 
 - name: Copy over our oauth secrets template into the secrets directory
   template: 
-    src: jupyterhub_oauth.env
-    dest: "{{ home }}/secrets/jupyterhub_oauth.env"
-    owner: "{{ jupyterhub_user }}"
+    src: oauth.env
+    dest: "{{ oauth_env }}"
+    owner: "{{ jukebox_user }}"
+  when: use_oauth
 
-- name: Copy over our environments template file to docker/hub 
+- name: Copy over blank oauth secrets file into the secrets directory
+  copy: 
+    src: "oauth_env.empty"
+    dest: "{{ oauth_env }}"
+  when: not use_oauth
+
+- name: Put our jupyterhub service authentication into "dev" mode if not using oauth
+  set_fact:
+    dev_mode: "set"
+  when: not use_oauth
+
+- name: "Copy over our environment variables file: '{{ jukebox_env }}'" 
   template: 
-    src: jupyterhub.env 
-    dest: "{{ home }}/config/jupyterhub.env"
-    owner: "{{ jupyterhub_user }}"
+    src: jukebox.env 
+    dest: "{{ jukebox_env }}"
+  when: isLocal
 
-- name: Copy our certbot cert into our secrets directory
+- name: "Copy over our environment variables file: '{{ jukebox_env }}'" 
+  template: 
+    src: jukebox.env 
+    dest: "{{ jukebox_env }}"
+    owner: "{{ jukebox_user }}"
+  when: not isLocal
+
+- name: Copy our certbot cert on our remote host to it's proper SSL directory
   become: true
-  become_user: "{{ jupyterhub_user }}"
-  shell: "cp {{ certbot_cert }} {{ home }}/secrets/ssl/"
-  ignore_errors: true
+  become_user: "{{ jukebox_user }}"
+  shell: "cp {{ certbot_cert }} {{ certbot_key }} {{ ssl_dir }}"
+  when: use_certbot
 
-- name: Copy our certbot key into our secrets directory
-  become: true
-  become_user: "{{ jupyterhub_user }}"
-  shell: "cp {{ certbot_key }} {{ home }}/secrets/ssl/" 
-  ignore_errors: true
+- name: Copy default certs into our ssl directory
+  copy: 
+    src: "{{ item }}"
+    dest: "{{ ssl_dir }}"
+  when: isLocal 
+  with_items: ["cert.pem","privkey.pem"]
 
+- name: "Copy over our docker-compose file to our run directory: '{{ run_dir }}'"
+  copy: 
+    src: "docker/bin/"
+    dest: "{{ run_dir }}"
+
+- name: "Copy over our shell script templates to our run directory: '{{ run_dir }}'"
+  template: 
+    src: "{{ item }}"
+    dest: "{{ run_dir }}"
+  with_items: ['build.sh','reset.sh']
 - name: Set permissions on our build file
-  shell: warn=false chmod 755 "{{ home }}/docker/build.sh"
+  shell: "warn=false chmod 755 {{ run_dir }}/*.sh"
 
 - name: Build docker image 
-  command: "{{ home }}/docker/build.sh"
+  shell: "{{ run_dir }}/build.sh"

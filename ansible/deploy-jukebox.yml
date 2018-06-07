@@ -3,4 +3,4 @@
 - import_playbook: tasks/ssh_hostname.yml group=jup
 - import_playbook: tasks/ensure_python.yml group=jup
 - import_playbook: tasks/create_users.yml group=jup
-- import_playbook: tasks/run_jupyter.yml group=jup
+- import_playbook: tasks/run_jukebox.yml group=jup
