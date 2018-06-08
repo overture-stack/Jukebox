@@ -1,0 +1,18 @@
+# docker
+- name: Copy over docker files
+  copy:
+    src: "files/"
+    dest: "{{ build_dir }}/notebook"
+
+- name: "create docker volume: '{{ item }}'"
+  shell: "docker volume inspect {{ item }} >/dev/null 2>&1 || docker volume create --name {{ item }}"
+  with_items: [ "{{ opt_volume }}" ]
+
+- name: "build docker volume image"
+  shell: "cd {{ build_dir }}/notebook; docker build -t {{create_volume_image}} . -f Dockerfile.create-volume"
+
+- name: "create notebook image"
+  shell: "cd {{ build_dir }}/notebook; docker build -t {{notebook_image}} . "
+
+- name: Run bash so that the mount will copy the mount directory into the volume
+  shell: "docker run -v \"{{opt_volume}}:/opt\" {{create_volume_image}} /bin/bash"

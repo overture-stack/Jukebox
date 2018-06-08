@@ -1,0 +1,21 @@
+# version of jupyterhub to build & run 
+jupyterhub_version: 0.8
+
+# Paths used by jupyterhub within it's docker container
+service_dir: "/srv/jupyterhub"	
+
+# mount point for docker volume to persist the user data between reboots
+data_mount_point: /data
+share_mount: "{{ service_dir }}/share"
+
+ssl_mount: "{{ service_dir }}/ssl"
+
+ssl_key: "key.pem"
+ssl_cert: "cert.pem"
+
+# where to find the logo image
+logo_path: "{{ service_dir }}/www_custom/hub/logo"
+
+# Path to the docker socket within jupyterhub container
+jupyterhub_socket: "/var/run/docker.sock"
+

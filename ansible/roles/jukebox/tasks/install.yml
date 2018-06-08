@@ -1,0 +1,19 @@
+- name: "create docker network: '{{ item }}'"
+  shell: "docker network inspect {{ item }} >/dev/null 2>&1 || docker network create {{ item }}"
+  with_items: ["{{ docker_network_name }}"]
+
+- name: "create docker volume: '{{ item }}'"
+  shell: "docker volume inspect {{ item }} >/dev/null 2>&1 || docker volume create --name {{ item }}"
+  with_items: ["{{ data_volume }}"]
+
+- name: "ensure our run directory exists"
+  shell: "test -d {{ run_dir }} || mkdir -p {{ run_dir }}"
+
+- name: "Copy in our run directory: '{{ item }}'"
+  template:
+    src: "{{ item }}"
+    dest: "{{ run_dir }}"
+  with_items: ['jukebox.sh', 'reset.sh', 'docker-compose.yml']
+
+- name: Set permissions on all our executable files 
+  shell: "warn=false chmod 755 {{ run_dir }}/*"

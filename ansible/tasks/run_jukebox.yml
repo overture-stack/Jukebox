@@ -6,9 +6,10 @@
     - "../vars/docker.yml"
     - "../vars/jukebox.yml"
     - "../vars/deploy.yml"
+    - "../vars/jupyterhub.yml"
+    - "../vars/jupyter_notebook.yml"
     - "{{ oauth_secrets }}"
   roles: 
-    - "../roles/docker"
     - "../roles/jukebox"
   become: true
   become_user: "{{ jukebox_user }}"

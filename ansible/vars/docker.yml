@@ -1,52 +1,23 @@
-# Location of the Jupyterhub service that runs inside the Docker container
-service_dir: "/srv/jupyterhub/"
+# Docker
+docker_group: docker
 
-# The name of pre-existing certificate files to use (for local installations)
-cert_name: "{{ ssl_dir }}/cert.pem"
-key_name: "{{ ssl_dir }}/key.pem"
-
-# Where to find the secrets files inside the jupyterhub container
-ssl_cert: "{{service_dir }}/{{cert_name}}"
-ssl_key: "{{ service_dir }}/{{key_name}}"
-
-# Jupyterhub Docker variables
-jupyterhub_version: "0.8.0"
 docker_machine_name: "{{ host }}"
 docker_network_name: "{{ service_name}}-network"
 
 # Name of the docker compose project  
 compose_project_name: "{{ service_name }}"
-local_notebook_image: "{{ service_name }}-notebook"
-docker_notebook_image: "{{ service_name }}-docker"
-
-# The user name for the end user inside the docker notebook container
-# 'jovyan' is the one used by Project Jupyter, so we kept it to be consistent. 
-# The name is a pun on the word "jovian", meaning "of Jupiter". 
-docker_notebook_dir: "/home/jovyan"
-
-# The command to run inside the docker container to start the jupyter notebook
-docker_spawn_cmd: "start-singleuser.sh"
-
-# The name of the docker volume where user's docker container data can be
-# found, and where to find it inside docker. 
-data_volume: "{{ service_name }}-data"
-data_mount_point: /data
-
-# The docker volume for all of the conda distribution files, and the
-# and the mount point where they are stored.
-opt_volume: "{{ service_name }}-opt"
-web_mount_point: "/opt/conda/"
-path: "/opt/conda/bin:/usr/bin:/usr/local/bin:/usr/sbin:/bin:/icgc/bin"
-logo_path: "{{ service_dir }}/www_custom/hub/logo"
-create_volume_image: "{{ service_name }}-create_volume"
-core_image: "{{ service_name }}-core"
 container_name: "jupyterhub"
 
-# Docker task currently symlinks these from the certbot files defined below
-key_file: "{{ ssl_dir }}/privkey.pem"
-cert_file: "{{ ssl_dir }}/cert.pem"
+# Docker image tags
+notebook_image: "notebook"
+create_volume_image: "create_volume"
+jupyterhub_image: "jupyterhub"
 
-# Docker
-docker_group: docker
-# path to oauthenticator library inside the Jupyterhub docker container
-oauthenticator_lib: "{{ home }}/lib/python3.5/site-packages/oauthenticator/"
+# Name of docker volume that contains the user data
+data_volume: "{{ service_name }}-data"
+
+# The docker volume that contains all of the conda distribution files
+opt_volume: "{{ service_name }}-opt"
+
+# The path to the docker UNIX file socket on the remote machine
+docker_socket: /var/run/docker.sock

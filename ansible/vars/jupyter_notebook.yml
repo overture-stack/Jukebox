@@ -1,0 +1,10 @@
+docker_notebook_dir: "/home/jovyan"
+
+# The command to run inside the docker container to start the jupyter notebook
+docker_spawn_cmd: "start-singleuser.sh"
+
+# Where to mount the conda distribution inside the notebook container
+opt_mount: "/opt"
+
+# The path to set inside the notebook's .bashrc
+notebook_path: "/opt/conda/bin:/usr/bin:/usr/local/bin:/usr/sbin:/bin"

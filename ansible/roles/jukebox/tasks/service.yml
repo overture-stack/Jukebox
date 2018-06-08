@@ -1,0 +1,30 @@
+- name: Create jukebox.service
+  become_user: root
+  become: true
+  template:
+    src: jukebox.service
+    dest: "/etc/systemd/system/{{ jukebox_service_name }}.service"
+    owner: root
+    group: root
+    mode: 0664
+
+- name: Copy over jukebox.sh 
+  become_user: "{{ jukebox_user }}" 
+  become: true
+  template:
+    src: jukebox.sh
+    dest: "{{ home }}/jukebox.sh"
+    owner: "{{ jukebox_user }}" 
+    mode: 0755
+
+- name: Update services
+  become_user: root
+  become: true
+  shell: systemctl daemon-reload
+
+- name: Run jukebox.service
+  become_user: root
+  become: true
+  service: 
+    name: "{{ jukebox_service_name }}"
+    state: started

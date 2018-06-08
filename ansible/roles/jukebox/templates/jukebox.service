@@ -1,5 +1,5 @@
 [Unit]
-Description=Jupyterhub
+Description={{ service_name }}
 After=syslog.target network.target
 
 [Service]

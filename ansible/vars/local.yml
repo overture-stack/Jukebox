@@ -1,6 +1,7 @@
 ###############################################################################
 # Copyright 2017-2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 ################################################################################
+isLocal: true
 host: localhost
 home: ~/jukebox
 

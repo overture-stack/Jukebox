@@ -1,6 +1,5 @@
 #!/bin/sh
 cd {{ run_dir }}
-. {{ jukebox_env }}
 docker-compose down
-docker rmi ${DOCKER_NOTEBOOK_IMAGE}
+docker rmi {{ notebook_image }}
 docker-compose up

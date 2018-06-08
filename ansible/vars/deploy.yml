@@ -11,11 +11,15 @@ ansible_ssh_private_key_file: ~/.ssh/ansible
 jukebox_user: "jukebox"
 jukebox_group: "jukebox"
 
-# Name of the Jukebox service on the remote machine
-jukebox_service_name: "{{ jukebox_user }}"
+# Which group of users are authorized to use docker?
+docker_group: "docker"
 
-# where to install Jukebox
+# Name of the Jukebox service on the remote machine
+jukebox_service_name: "{{ service_name }}"
+
+# where to install Jukebox (default = inside Jukebox's home directory)
 home: "~{{jukebox_user}}"
 
 # The hostname of the system that Jukebox & Jupyterhub runs on
-host: "jupyterhub.cancercollaboratory.org"
+# eg. host: "jupyterhub.cancercollaboratory.org"
+isLocal: false

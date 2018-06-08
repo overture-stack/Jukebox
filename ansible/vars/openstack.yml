@@ -1,10 +1,10 @@
 # OpenStack Settings
 openstack_secrets: "<secrets file path goes here>" # eg. ~/secrets/openstack_secrets.yml 
+#login_username: '' # set this in your openstack_secrets file
+#login_password: '' # set this in your openstack_secrets file
 openstack_server: "<Your openstack server hostname goes here>"
 auth_url: "https://{{ openstack_server }}:5000/v3/"
 login_project_name: "<Your openstack project name goes here>"
-#login_username: '' # set this in the openstack_secrets file
-#login_password: '' # set this in the openstack_secrets file
 private_net: "<Your private network name goes here>"
 image_id: Ubuntu 18.04 - latest # or whatever you have
 flavor_id: c1.large
