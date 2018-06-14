@@ -4,14 +4,14 @@
   gather_facts: no
   become: yes
   hosts: "{{ group }}"
+  remote_user: "{{ ansible_ssh_user }}"
   vars_files:
     - "../vars/main.yml"
-    - "{{ secrets_file }}"
+    - "../vars/deploy.yml"
   tasks:
     - ping:
       register: ping 
       ignore_errors: true
-      remote_user: "{{ ansible_ssh_user }}"
 
     - name: "Update apt"
       raw: sudo apt-get update
@@ -19,4 +19,5 @@
 
     - name: "Install python"
       raw: yes | sudo apt-get install python
+      # remote_user: "{{ ansible_ssh_user }}"
       when: ping.failed

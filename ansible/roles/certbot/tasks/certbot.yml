@@ -22,7 +22,7 @@
 - name: Run certbot to create a SSL certificate for our server 
   become: true
   become_user: root
-  shell: "certbot certonly -d {{ host }}--agree-tos --email {{ certbot_email }} --standalone -q"
+  shell: "certbot certonly -d {{ host }} --agree-tos --email {{ certbot_email }} --standalone -q"
   args:
     creates: "{{ certbot_cert }}" 
   ignore_errors: true

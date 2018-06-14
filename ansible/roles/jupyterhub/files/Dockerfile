@@ -16,6 +16,7 @@ TEMPLATE_DIR=$SERVICE_DIR/www_custom/hub/templates/
 RUN pip install --upgrade pip
 RUN pip install dockerspawner
 RUN pip install jupyterhub-dummyauthenticator
+RUN [ "${USE_OAUTH}" = "False" ] || pip install oauthenticator 
 
 # symbolic link to the web page customization section of the juptyterhub module 
 RUN set -x; ln -s $HUB_DIR $SERVICE_DIR/www

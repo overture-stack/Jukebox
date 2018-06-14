@@ -18,8 +18,10 @@ docker_group: "docker"
 jukebox_service_name: "{{ service_name }}"
 
 # where to install Jukebox (default = inside Jukebox's home directory)
-home: "~{{jukebox_user}}"
+home: "/home/{{jukebox_user}}"
 
-# The hostname of the system that Jukebox & Jupyterhub runs on
-# eg. host: "jupyterhub.cancercollaboratory.org"
+# Add this ssl mount configuration to our docker-compose file 
+ssl: "- {{ ssl_dir }}:{{ ssl_mount }}"
+
 isLocal: false
+# or we wouldn't be deploying it as a remote system, would we?

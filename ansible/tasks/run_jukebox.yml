@@ -8,6 +8,8 @@
     - "../vars/deploy.yml"
     - "../vars/jupyterhub.yml"
     - "../vars/jupyter_notebook.yml"
+    - "../vars/certbot.yml"
+    - "../vars/oauth.yml"
     - "{{ oauth_secrets }}"
   roles: 
     - "../roles/jukebox"

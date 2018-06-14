@@ -1,0 +1,1 @@
+export PYTHONPATH=/usr/local/Cellar/ansible/2.5.4/libexec/lib/python2.7/site-packages

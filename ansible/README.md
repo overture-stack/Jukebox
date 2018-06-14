@@ -10,15 +10,9 @@ login_password: *< openstack user's password >*
 
 # This must be the name of a SSH keypair that you've
 # uploaded to your OpenStack account; it should
-# also be the same name as the key file name in your
+# also be the same name as a key file name in your
 # .ssh home directory
 keypair_name: *<keypair name>*
-    
-# Ansible Settings
-# This needs to be the name of a user with ssh
-# access to openstack; it might be the same as the
-# openstack login_username field.
-openstack_ssh_user: *<ssh user >*
 ```    
 2. Edit ~/vars/openstack.yml, and make sure the first line is set to the name of your openstack secrets file. 
 3. Fill in the rest of the information in openstack.yml with the correct 
@@ -38,5 +32,6 @@ oauth_client_secret: <secret>
 
 7. Edit the file './config/hosts', and set the hostname of the host on your openstack instance that you want to create. 
 
-8. Type: ansible-playbook deploy-jukebox.yml 
+8. Type `. openstack_fix` to work around an issue with openstack having a python module with the same name as their ansible module. 
 
+9. Type: ansible-playbook deploy-jukebox.yml 

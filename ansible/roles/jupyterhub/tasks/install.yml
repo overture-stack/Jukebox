@@ -19,6 +19,9 @@
 - name: Create the run directory if it doesn't exist
   shell: test -d {{ run_dir }} || mkdir -p {{ run_dir }}
 
+- name: Create the ssl directory if it doesn't exist
+  shell: test -d {{ ssl_dir }} || mkdir -p {{ ssl_dir }}
+  when: use_certbot
 
 - name: Copy our certbot cert on our remote host to it's proper SSL directory
   become: true

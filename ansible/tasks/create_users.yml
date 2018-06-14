@@ -1,12 +1,12 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 - name: Create users 
   hosts: "{{ group }}" 
+  remote_user: "{{ ansible_ssh_user }}"
   vars_files:
     - "../vars/main.yml"
-    - "{{ secrets_file }}"
+    - "../vars/deploy.yml"
   roles: 
     - "../roles/users"
-    - "../roles/certbot"
   become: true
   become_user: root
 
