@@ -57,7 +57,7 @@ if use_oauth.lower() == 'true':
     c.JupyterHub.authenticator_class = GoogleOAuthenticator
     
     c.GoogleOAuthenticator.oauth_callback_url = "{{ oauth_callback_url }}"
-    c.GoogleOAuthenticator.client_id = "{{ oauth_client_secret }}"
+    c.GoogleOAuthenticator.client_id = "{{ oauth_client_id }}"
     c.GoogleOAuthenticator.client_secret = "{{ oauth_client_secret }}"
 else:
     c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
