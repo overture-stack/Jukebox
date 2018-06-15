@@ -1,4 +1,5 @@
 # How to configure Jukebox for your Openstack system
+
 1. Make a file with your openstack secrets in it, say '~/secrets/openstack_secrets'. In it create a file called openstack_secrets.yml, and copy the in the section below, filling in the values with your 
 secret information.
 ```
@@ -32,6 +33,13 @@ oauth_client_secret: <secret>
 
 7. Edit the file './config/hosts', and set the hostname of the host on your openstack instance that you want to create. 
 
-8. Type `. openstack_fix` to work around an issue with openstack having a python module with the same name as their ansible module. 
+9. Edit the file /vars/certbot.yml, and enter your email address.
 
-9. Type: ansible-playbook deploy-jukebox.yml 
+10. Type: ansible-playbook deploy-jukebox.yml 
+
+Note: If you have shade installed (use 'pip2 install shade'), and you still get the error message: 'shade not installed', it may be because there is both an
+python module called 'openstack' (which shade installs), and an ansible module called 'openstack' (which ansible installs).
+
+In that case, you can work around the issue by setting your PYTHON_PATH environment variable to directory where your ansible modules have been installed. 
+
+`. fix_openstack_fix` does this for MacOS/X. 
