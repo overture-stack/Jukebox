@@ -1,30 +1,8 @@
-- name: Create jupyterhub service
-  become_user: root
-  become: true
-  template:
-    src: jupyterhub.service
-    dest: "/etc/systemd/system/{{ jupyterhub_service }}.service"
-    owner: root
-    group: root
-    mode: 0664
+- name: Build the dockerhub image 
+  import_tasks: install.yml
+  when: not isLocal 
 
-- name: Copy over jupyterhub.sh 
-  become_user: "{{ jupyterhub_user }}" 
-  become: true
-  template:
-    src: jupyterhub.sh
-    dest: "{{ home }}/jupyterhub.sh"
-    owner: "{{ jupyterhub_user }}" 
-    mode: 0755
-
-- name: Update services
-  become_user: root
-  become: true
-  shell: systemctl daemon-reload
-
-- name: Run jupyterhub service
-  become_user: root
-  become: true
-  service: 
-    name: "{{ jupyterhub_service }}"
-    state: started
+- name: Run docker build locally
+  import_tasks: install.yml
+  connection: local
+  when: isLocal 

@@ -1,0 +1,27 @@
+# Configuration file for remote deployments
+#
+# Ansible Settings
+host_key_checking: False 
+ansible_ssh_user: ubuntu
+ansible_ssh_private_key_file: ~/.ssh/ansible
+
+# Jukebox Configuration 
+# Which user will build and run Jukebox on the remote system, and  
+# and where are the files to be stored?
+jukebox_user: "jukebox"
+jukebox_group: "jukebox"
+
+# Which group of users are authorized to use docker?
+docker_group: "docker"
+
+# Name of the Jukebox service on the remote machine
+jukebox_service_name: "{{ service_name }}"
+
+# where to install Jukebox (default = inside Jukebox's home directory)
+home: "/home/{{jukebox_user}}"
+
+# Add this ssl mount configuration to our docker-compose file 
+ssl: "- {{ ssl_dir }}:{{ ssl_mount }}"
+
+isLocal: false
+# or we wouldn't be deploying it as a remote system, would we?

@@ -1,0 +1,6 @@
+- name: Install jukebox 
+  include_tasks: install.yml
+
+- name: Setup jukebox service
+  include_tasks: service.yml
+  when: not isLocal

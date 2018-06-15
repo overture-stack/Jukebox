@@ -1,0 +1,12 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+- name: Remove the hostname '{{ inventory_hostname }}' from ~/.ssh/known_hosts
+  shell: ssh-keygen -R "{{ inventory_hostname }}" -f ~/.ssh/known_hosts
+  connection: local
+
+- name: Remove the ip '{{ host_ip }} from ~/.ssh/known_hosts
+  shell: ssh-keygen -R "{{ host_ip }}" -f ~/.ssh/known_hosts
+  connection: local
+
+- name: Add new hostname '{{ inventory_hostname }}' to ~/.ssh/known_hosts file
+  shell: "ssh-keyscan {{ inventory_hostname }} >> ~/.ssh/known_hosts"
+  connection: local

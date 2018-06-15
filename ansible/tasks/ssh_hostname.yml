@@ -1,13 +1,12 @@
 # Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
 
-- name: Creates OpenStack VM instances for all our hosts 
+- name: Sets up the ssh known hosts appropriately so we don't get prompted when we run this ansible playbook interactively
   hosts: "{{ group }}"
   user: root
   gather_facts: no
   serial: 1
   vars_files:
     - "../vars/main.yml"
-    - "../vars/openstack.yml"
-    - "{{ openstack_secrets }}"
+    - "{{ ssh_secrets }}"
   roles:
-    - ../roles/openstack
+    - ../roles/ssh_hostname

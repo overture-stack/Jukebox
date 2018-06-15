@@ -1,0 +1,12 @@
+[Unit]
+Description={{ service_name }}
+After=syslog.target network.target
+
+[Service]
+User={{ jukebox_user }}
+Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:{{ home }}/bin"
+ExecStart={{ home }}/jukebox.sh
+WorkingDirectory={{ home }}
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+# Where to put install the SSL certificates for the site 
+ssl_dir: "{{ home }}/ssl"
+
+# The shared directory to mount to transfer files into/out of the JupyterHub
+# container when customizing the look & feel  
+share_dir: "{{ home }}/share"
+
+# Where to put the files for the docker build
+build_dir: "{{ home }}/build"
+
+# Where to put the shell scripts & docker-compose file 
+run_dir: "{{ home }}/bin"
+
+restart_policy: always

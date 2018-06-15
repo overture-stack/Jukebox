@@ -1,0 +1,5 @@
+# SSL Client Certificate Information
+#
+certbot_cert: /etc/letsencrypt/live/{{ host}}/cert.pem
+certbot_key: /etc/letsencrypt/live/{{ host}}/privkey.pem
+certbot_email: "<your email goes here>" 

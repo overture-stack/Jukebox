@@ -1,0 +1,38 @@
+- name: Install requirements for certbot 
+  become: true
+  become_user: root 
+  apt:
+    update_cache: yes 
+    name: software-properties-common 
+
+- name: Add certbot repository to apt
+  become: true
+  become_user: root
+  apt_repository:
+    repo: ppa:certbot/certbot 
+    state: present
+
+- name: Install certbot 
+  become: true
+  become_user: root 
+  apt:
+    update_cache: yes 
+    name: certbot 
+
+- name: Run certbot to create a SSL certificate for our server 
+  become: true
+  become_user: root
+  shell: "certbot certonly -d {{ host }} --agree-tos --email {{ certbot_email }} --standalone -q"
+  args:
+    creates: "{{ certbot_cert }}" 
+  ignore_errors: true
+
+- name: Grant jukebox group permission to find the certs
+  become: true
+  become_user: root
+  file:
+    path: "/etc/letsencrypt/{{ item }}"
+    group: "{{ jukebox_group }}"
+    mode: "g+x"
+  with_items: [ live, archive ]
+  ignore_errors: true

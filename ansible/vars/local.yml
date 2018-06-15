@@ -1,0 +1,17 @@
+###############################################################################
+# Copyright 2017-2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+################################################################################
+isLocal: true
+host: localhost
+home: ~/jukebox
+
+# The settings below only works for machines with hostnames that are visible 
+# across the entire Internet; if you're running this on your local machine,
+# this probably isn't you.
+
+# Use certbot to register and install SSL certificates for this site 
+use_certbot: false
+use_oauth: false
+
+# We don't need to mount anything special for ssl 
+ssl: ""

@@ -1,5 +1,3 @@
 - name: Install dockerhub 
   import_tasks: install.yml
-
-- name: Build the dockerhub image 
-  import_tasks: build.yml
+  when: not isLocal 

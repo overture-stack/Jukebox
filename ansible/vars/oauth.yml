@@ -1,0 +1,5 @@
+# Google OIDC (OAUTH2) single sign on configuration
+oauth_secrets: "<set path to secrets file here>" 
+#oauth_client_id: ''      # set this in the oauth_secrets file
+#oauth_client_secret: ''  # set this in the oauth_secrets file
+oauth_callback_url: "https://{{ host }}:{{ jupyterhub_port }}/hub/oauth_callback"

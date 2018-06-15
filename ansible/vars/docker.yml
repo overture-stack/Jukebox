@@ -1,0 +1,23 @@
+# Docker
+docker_group: docker
+
+docker_machine_name: "{{ host }}"
+docker_network_name: "{{ service_name}}-network"
+
+# Name of the docker compose project  
+compose_project_name: "{{ service_name }}"
+container_name: "jupyterhub"
+
+# Docker image tags
+notebook_image: "notebook"
+create_volume_image: "create_volume"
+jupyterhub_image: "jupyterhub"
+
+# Name of docker volume that contains the user data
+data_volume: "{{ service_name }}-data"
+
+# The docker volume that contains all of the conda distribution files
+opt_volume: "{{ service_name }}-opt"
+
+# The path to the docker UNIX file socket on the remote machine
+docker_socket: /var/run/docker.sock

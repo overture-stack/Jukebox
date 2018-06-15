@@ -1,0 +1,9 @@
+#!/bin/sh
+# Get a shell prompt connected to our jupyterhub container
+SHARE=$(dirname $0)/share
+echo "Here's a root shell for the docker container running jupyterhub"
+echo
+echo "You can transfer files into the container by putting them the directory "${SHARE}", and they'll show up inside the container in the directory /srv/jukebox/share."
+echo
+echo "Enjoy!"
+docker exec -it {{ container_name }} /bin/bash

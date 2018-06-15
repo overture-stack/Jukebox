@@ -31,7 +31,8 @@
   become: true
   become_user: root
   apt_repository:
-    repo: "deb https://download.docker.com/linux/ubuntu {{ release.stdout }} stable"
+    #repo: "deb https://download.docker.com/linux/ubuntu {{ release.stdout }} stable"
+    repo: "deb https://download.docker.com/linux/ubuntu artful stable"
     state: present
 
 - name: Install docker

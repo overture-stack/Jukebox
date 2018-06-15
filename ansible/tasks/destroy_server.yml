@@ -10,4 +10,4 @@
     - "../vars/openstack.yml"
     - "{{ openstack_secrets }}"
   roles:
-    - ../roles/openstack
+    - ../roles/teardown

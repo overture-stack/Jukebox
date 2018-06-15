@@ -1,6 +1,13 @@
-[jup]
-jupyter
+[jukebox]
+test-jupyter
 
-[jup:vars]
-ansible_python_interpeter=/usr/bin/python3
-host_ip=142.1.177.132
+[jukebox:vars]
+host=test-jupyterhub.cancercollaboratory.org
+host_ip=142.1.177.222
+isLocal=false
+
+[local]
+localhost
+
+[local:vars]
+isLocal=true

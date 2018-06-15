@@ -1,19 +1,13 @@
-# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
-secrets_file: '~/secrets/ansible_secrets.yml'
-# OpenStack Settings
-auth_url: https://console.cancercollaboratory.org:5000/v3/ 
-login_project_name: OICR_Ferretti_Jupyter 
-#login_username: '' # set in secrets file
-#login_password: '' # set in secrets file 
-private_net: host-10-10-0-3.collab.org  
-image_id: Ubuntu 16.04 - latest 
-flavor_id: c1.micro 
-security_groups: "default,jupyterhub"
-internal_network_name: "OICR_Ferretti_Jupyter_net"
-ip_pool: "ext-net"
+###############################################################################
+# Copyright 2017-2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+################################################################################
+# The port to run Jupyterhub on: the default is 443 (SSL)
+jupyterhub_port: 443
 
-# Ansible Settings
-host_key_checking: True
-#openstack_ssh_user: '' 
-ansible_ssh_user: ubuntu 
-ansible_ssh_private_key_file: ~/.ssh/ansible 
+# Base name for docker images, etc.
+service_name: "jukebox"
+
+# Use certbot to register and install SSL certificates for the site 
+use_certbot: true
+use_oauth: true
+use_openstack: true

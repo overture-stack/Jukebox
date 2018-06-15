@@ -1,0 +1,51 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+- name: Copy over docker files 
+  copy: 
+    src: "files/"
+    dest: "{{ build_dir }}/hub/" 
+
+- name: Set dummy defaults for OAUTH, so that the template copy doesn't fail
+  set_fact:
+    oauth_callback_url: ""
+    oauth_client_id: ""
+    oauth_client_secret: ""
+  when: not use_oauth
+
+- name: Copy over our config file with all the ansible variables set 
+  template: 
+    src: "templates/jupyterhub_config.py"
+    dest: "{{ build_dir }}/hub/" 
+
+- name: Create the run directory if it doesn't exist
+  shell: test -d {{ run_dir }} || mkdir -p {{ run_dir }}
+
+- name: Create the ssl directory if it doesn't exist
+  shell: test -d {{ ssl_dir }} || mkdir -p {{ ssl_dir }}
+  when: use_certbot
+
+- name: Copy our certbot cert on our remote host to it's proper SSL directory
+  become: true
+  become_user: "{{ jukebox_user }}"
+  shell: "cp {{ certbot_cert }} {{ ssl_dir }}/{{ ssl_cert }}"
+  when: use_certbot
+
+- name: Copy our certbot key on our remote host to it's proper SSL directory
+  become: true
+  become_user: "{{ jukebox_user }}"
+  shell: "cp {{ certbot_key }} {{ssl_dir }}/{{ ssl_key}}"
+  when: use_certbot
+
+- name: Copy over our config file with all the ansible variables set 
+  template: 
+    src: "templates/hub_shell"
+    dest: "{{ run_dir }}/hub_shell" 
+
+- name: "Make a share directory: '{{ share_dir }}'"
+  shell: "test -d {{ share_dir }} || mkdir -p {{ share_dir }}"
+
+- name: "Make ssl secrets directory: {{ ssl_dir }}"
+  shell: "test -d {{ ssl_dir }} || mkdir -p {{ ssl_dir }}; touch {{ ssl_dir }}/ansible"
+
+- name: "Build docker image '{{ jupyterhub_image }}' in '{{ build_dir }}' with version '{{jupyterhub_version}}'" 
+  shell: "cd {{ build_dir }}/hub; docker build --build-arg=\"JUPYTERHUB_VERSION={{jupyterhub_version}}\" --build-arg=\"USE_OAUTH={{ use_oauth }}\" --build-arg=\"USE_CERTBOT={{ use_certbot }}\" --build-arg=\"SERVICE_DIR={{ service_dir }}\" --build-arg=\"CERT={{ ssl_cert }}\" --build-arg=\"SSL_DIR=`abspath {{ ssl_dir }}`\" --build-arg=\"KEY={{ ssl_key }}\" -t {{ jupyterhub_image }} ."
+
