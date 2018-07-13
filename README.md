@@ -4,6 +4,8 @@
     JupyterHub made easy.
 </p>
 
+<p align="center"><a href="http://www.overture.bio/products/jukebox/" target="_blank"><img alt="Release Candidate" title="Release Candidate" src="http://www.overture.bio/img/progress-horizontal-RC.svg" width="320" /></a></p>
+
 ## Table of Contents
 
 - [Introduction](#introduction)
