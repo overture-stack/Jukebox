@@ -51,13 +51,27 @@ use_oauth="{{ use_oauth }}"
 c.JupyterHub.admin_access = False 
 c.JupyterHub.logo_file="{{ logo_path }}"
 
+# Authenticate users with Google OAuth and DACO
 if use_oauth.lower() == 'true':
-    # Authenticate users with Google OAuth and DACO
     from oauthenticator.google import GoogleOAuthenticator
     c.JupyterHub.authenticator_class = GoogleOAuthenticator
     
     c.GoogleOAuthenticator.oauth_callback_url = "{{ oauth_callback_url }}"
     c.GoogleOAuthenticator.client_id = "{{ oauth_client_id }}"
     c.GoogleOAuthenticator.client_secret = "{{ oauth_client_secret }}"
+
+# Use DACO only with OAuth
+use_daco="{{ use_daco }}"
+if use_daco.lower() == 'true':
+    from oauthenticator.daco_client import DacoClient
+    from oauthenticator.daco import DacoOAuthenticator
+
+    c.DacoOAuthenticator.daco_base_url = "{{ daco_base_url }}"
+    c.DacoOAuthenticator.daco_client_key = "{{ daco_client_key }}"
+    c.DacoOAuthenticator.daco_client_secret = "{{ daco_client_secret }}"
+    c.DacoOAuthenticator.daco_token = "{{ daco_token }}"
+    c.DacoOAuthenticator.daco_token_secret = "{{ daco_token_secret }}"
+    c.JupyterHub.authenticator_class = DacoOAuthenticator
+
 else:
     c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
