@@ -6,6 +6,9 @@ version: "2"
 
 services:
   hub:
+    logging:
+      driver: syslog
+
     build:
       context: "{{ build_dir }}/hub"
       args:
