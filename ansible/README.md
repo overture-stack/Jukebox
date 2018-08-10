@@ -42,4 +42,4 @@ python module called 'openstack' (which shade installs), and an ansible module c
 
 In that case, you can work around the issue by setting your PYTHON_PATH environment variable to directory where your ansible modules have been installed. 
 
-`. fix_openstack_fix` does this for MacOS/X. 
+`. fix_openstack` does this for MacOS/X. 

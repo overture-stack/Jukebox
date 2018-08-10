@@ -1,11 +1,10 @@
 # OpenStack Settings
-openstack_secrets: "<secrets file path goes here>" # eg. ~/secrets/openstack_secrets.yml 
+openstack_secrets: "~/secrets/openstack_secrets.yml" 
 #login_username: '' # set this in your openstack_secrets file
 #login_password: '' # set this in your openstack_secrets file
 openstack_server: "<Your openstack server hostname goes here>"
 auth_url: "https://{{ openstack_server }}:5000/v3/"
 login_project_name: "<Your openstack project name goes here>"
-private_net: "<Your private network name goes here>"
 image_id: Ubuntu 18.04 - latest # or whatever you have
 flavor_id: c1.large
 internal_network_name: "<Your network name goes here>"
@@ -18,4 +17,3 @@ cdh_version: "CDH{{ cloudera_major }}"
 cdh_version_number: "{{ cloudera_version }}"
 cm_version: "{{ cloudera_version }}"
 cm_api_version: 9
-security_groups: "default"

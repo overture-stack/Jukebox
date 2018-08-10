@@ -8,6 +8,8 @@
     - "../vars/docker.yml"
     - "../vars/jupyterhub.yml"
     - "../vars/jupyter_notebook.yml"
+    - "../vars/oauth.yml"
+    - "../vars/daco.yml"
   roles: 
     - "../roles/jukebox"
   connection: local

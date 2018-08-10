@@ -10,7 +10,9 @@
     - "../vars/jupyter_notebook.yml"
     - "../vars/certbot.yml"
     - "../vars/oauth.yml"
+    - "../vars/daco.yml"
     - "{{ oauth_secrets }}"
+    - "{{ daco_secrets }}"
   roles: 
     - "../roles/jukebox"
   become: true

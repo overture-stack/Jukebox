@@ -6,6 +6,9 @@ version: "2"
 
 services:
   hub:
+    logging:
+      driver: syslog
+
     build:
       context: "{{ build_dir }}/hub"
       args:
@@ -18,6 +21,7 @@ services:
       # Bind Docker socket on the host so we can connect to the daemon from
       # within the container
       - "{{ docker_socket}}:{{ jupyterhub_socket }}:rw"
+      - "/dev/log:/dev/log:rw"
       # Bind Docker volume on host for JupyterHub database and cookie secrets
       - "data:{{ data_mount_point }}"
       - "{{ share_dir }}:{{ share_mount }}"
