@@ -36,3 +36,8 @@
     mode: "g+x"
   with_items: [ live, archive ]
   ignore_errors: true
+
+- name: "Copy in the crontab file that checks for certbot changes"
+  template:
+    src: "jukebox"
+    dest: "/etc/cron.d/jukebox"
