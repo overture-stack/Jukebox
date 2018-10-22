@@ -38,6 +38,7 @@
   ignore_errors: true
 
 - name: "Copy in the crontab file that checks for certbot changes"
+  become_user: root
   template:
     src: "jukebox"
     dest: "/etc/cron.d/jukebox"
