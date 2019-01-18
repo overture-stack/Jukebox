@@ -16,7 +16,7 @@ network_name = "{{ docker_network_name }}"
 c.DockerSpawner.network_name = network_name
 
 # Pass the network name as argument to spawned containers
-c.DockerSpawner.extra_host_config = { 'network_mode': network_name } 
+c.DockerSpawner.extra_host_config.update({ 'network_mode': network_name, 'devices': ['/dev/fuse:/dev/fuse:rwm'], 'cap_add': ['SYS_ADMIN'], 'security_opt': ['apparmor=unconfined'] })
 notebook_dir = "{{ docker_notebook_dir }}"
 c.DockerSpawner.notebook_dir = notebook_dir
 c.DockerSpawner.links={network_name: network_name}

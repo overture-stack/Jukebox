@@ -23,9 +23,9 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 # Install latest version of storage client distribution
 #
 
-RUN mkdir -p /icgc/icgc-storage-client && \
-    cd /icgc/icgc-storage-client && \
-    wget -qO- https://artifacts.oicr.on.ca/artifactory/dcc-release/org/icgc/dcc/icgc-storage-client/[RELEASE]/icgc-storage-client-[RELEASE]-dist.tar.gz | \
+RUN mkdir -p /tmp/score-client && \
+    cd /tmp/score-client && \
+    wget -qO- https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz | \
     tar xvz --strip-components 1
 
 RUN apt-get install -y samtools man locate vim net-tools
@@ -49,14 +49,13 @@ ADD --chown=jovyan:users *.tsv ./
 # version of the code until we can submit the issue and get it patched...
 ADD --chown=jovyan:users main.min.js /opt/conda/lib/python3.6/site-packages/notebook/js/
 
-# We will rename this to score-client soon... 
-RUN mv /icgc/icgc-storage-client /home/jovyan/icgc-storage-client
+RUN mv /tmp/score-client /home/jovyan/score-client
 RUN mkdir ~jovyan/mydata
 RUN mkdir ~jovyan/mydata/mnt
 RUN echo 'function addPath { export PATH=$PATH:$1 ; }' >> ~jovyan/.bashrc
-RUN echo 'addPath ~/icgc-storage-client/bin' >> ~jovyan/.bashrc
+RUN echo 'addPath ~/score-client/bin' >> ~jovyan/.bashrc
 RUN echo 'export STORAGE_PROFILE=collab' >> ~jovyan/.bashrc
-RUN echo "alias mount_collab='icgc-storage-client mount --cache-metadata mydata/mnt --mount-point collab'" >> ~jovyan/.bashrc
+RUN echo "alias score-mount='score-client mount --cache-metadata --mount-point mydata/mnt'" >> ~jovyan/.bashrc
 RUN echo 'umask 077' >> ~jovyan/.bashrc
 RUN rm -rf ~/.cache;mkdir ~/.cache
 RUN chown -R jovyan:users /home/jovyan

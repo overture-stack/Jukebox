@@ -46,6 +46,13 @@
 - name: "Make ssl secrets directory: {{ ssl_dir }}"
   shell: "test -d {{ ssl_dir }} || mkdir -p {{ ssl_dir }}; touch {{ ssl_dir }}/ansible"
 
-- name: "Build docker image '{{ jupyterhub_image }}' in '{{ build_dir }}' with version '{{jupyterhub_version}}'" 
-  shell: "cd {{ build_dir }}/hub; docker build --build-arg=\"JUPYTERHUB_VERSION={{jupyterhub_version}}\" --build-arg=\"USE_OAUTH={{ use_oauth }}\" --build-arg=\"USE_CERTBOT={{ use_certbot }}\" --build-arg=\"SERVICE_DIR={{ service_dir }}\" --build-arg=\"CERT={{ ssl_cert }}\" --build-arg=\"SSL_DIR=`abspath {{ ssl_dir }}`\" --build-arg=\"KEY={{ ssl_key }}\" --build-arg=\"PYTHON_LIB={{ python_lib }}\" --build-arg=\"HUB_DIR={{ hub_dir }}\" -t {{ jupyterhub_image }} ."
+- name: Copy over our command to build docker into the run directory 
+  template: 
+    src: "templates/build_hub"
+    dest: "{{ run_dir }}/build_hub" 
 
+- name: Set permissions on our executable that builds our docker hub image 
+  shell: "warn=false chmod 755 {{ run_dir }}/build_hub"
+
+- name:  Build our docker image on the remote host
+  shell: "{{ run_dir }}/build_hub" 
