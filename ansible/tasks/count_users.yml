@@ -1,0 +1,26 @@
+# Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
+- name: Count the number of people running docker countainers 
+  gather_facts: no
+  become: yes
+  hosts: "{{ group }}"
+  remote_user: "{{ ansible_ssh_user }}"
+  vars_files:
+    - "../vars/main.yml"
+    - "../vars/deploy.yml"
+  tasks:
+    - name: "Count docker users"
+      shell: docker ps -a | grep _40 | wc -l | tr -d '\r\n'
+      register: count
+
+    - name: "Clear connection errors"
+      meta: clear_host_errors 
+
+- name: Generate report 
+  gather_facts: no
+  hosts: "{{ group }}"
+  vars_files:
+    - "../vars/report.yml"
+  tasks:
+    - name: Report that we have "{{ count.stdout }}" docker users on Jukebox. 
+      raw:  echo "We have "{{ count.stdout }}" docker users on Jukebox." > "{{ report_file }}" 
+      connection: local

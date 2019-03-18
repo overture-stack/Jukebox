@@ -2,5 +2,6 @@
 - import_playbook: tasks/create_server.yml group=jukebox
 - import_playbook: tasks/ssh_hostname.yml group=jukebox
 - import_playbook: tasks/ensure_python.yml group=jukebox
+- import_playbook: tasks/copy_ssh_keys.yml group=jukebox
 - import_playbook: tasks/create_users.yml group=jukebox
 - import_playbook: tasks/run_jukebox.yml group=jukebox

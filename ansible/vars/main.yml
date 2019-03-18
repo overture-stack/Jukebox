@@ -11,3 +11,4 @@ service_name: "jukebox"
 use_certbot: true
 use_oauth: true
 use_openstack: true
+use_daco: true

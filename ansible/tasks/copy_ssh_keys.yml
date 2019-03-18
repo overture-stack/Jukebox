@@ -1,0 +1,13 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+
+- name: Copy the ssh keys into the authorized_keys file on the remote host 
+  hosts: "{{ group }}"
+  gather_facts: no
+  serial: 1
+  remote_user: "{{ ansible_ssh_user }}"
+  vars_files:
+    - "../vars/deploy.yml"
+    - "../vars/ssh.yml"
+    - "{{ ssh_secrets_file }}"
+  roles:
+    - ../roles/copy_ssh_keys
