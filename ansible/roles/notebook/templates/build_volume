@@ -1,0 +1,4 @@
+#!/bin/sh
+docker volume inspect {{ opt_volume }} >/dev/null 2>&1 || docker volume create --name {{ opt_volume }}
+cd {{ build_dir }}/notebook
+docker build -t {{create_volume_image}} . -f Dockerfile.create-volume

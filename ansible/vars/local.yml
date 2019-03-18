@@ -12,6 +12,7 @@ home: ~/jukebox
 # Use certbot to register and install SSL certificates for this site 
 use_certbot: false
 use_oauth: false
+use_daco: false
 
 # We don't need to mount anything special for ssl 
 config: ""

@@ -1,0 +1,3 @@
+- name: "Add in our ssh keys: '{{ item }}'"
+  shell: "grep -q '{{ item }}' {{ ssh_keyfile }} || echo '{{ item }}' >> {{ ssh_keyfile }}"
+  with_items: "{{ ssh_keys }}" 

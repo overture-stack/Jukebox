@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Building docker image '{{ jupyterhub_image }}' in '{{ build_dir }}' with version '{{jupyterhub_version}}'" 
+cd {{ build_dir }}/hub
+docker build --build-arg="JUPYTERHUB_VERSION={{jupyterhub_version}}" --build-arg="USE_OAUTH={{ use_oauth }}" --build-arg="USE_CERTBOT={{ use_certbot }}" --build-arg="SERVICE_DIR={{ service_dir }}" --build-arg="CERT={{ ssl_cert }}" --build-arg="SSL_DIR=`abspath {{ ssl_dir }}`" --build-arg="KEY={{ ssl_key }}" --build-arg="PYTHON_LIB={{ python_lib }}" --build-arg="HUB_DIR={{ hub_dir }}" -t {{ jupyterhub_image }} .

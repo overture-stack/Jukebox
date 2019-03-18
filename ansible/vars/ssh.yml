@@ -1,0 +1,5 @@
+# local file to get the secret keys from
+ssh_secrets_file: ~/secrets/ssh/keys.yml
+# remote file to append the secret keys to
+ssh_keyfile: ~/.ssh/authorized_keys
+
