@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.navbar {
+  margin: 0;
+}
+
+.jupyterhub-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.jupyterhub-logo a {
+  align-self: center;
+}
+
+.logo-text {
+  vertical-align: middle;
+  align-self: center;
+  margin-top: 6px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+#login-main,
+.bkg-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: url("../images/icgc/background-explore-ICGC.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+#login-main .service-login {
+  width: 80%;
+  max-width: 640px;
+  margin: 0;
+  padding: 20px;
+  background: #ffffff;
+  border: 10px solid rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+
+  -moz-background-clip: padding; /* Firefox 3.6 */
+  -webkit-background-clip: padding; /* Safari 4? Chrome 6? */
+  background-clip: padding-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
+}
+
+.icgc-jupyter-logo {
+  display: inline-block;
+  max-width: 91%;
+  height: auto;
+}
+
+.service-login .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px 0 10px;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.3);
+}
+
+.service-login .body {
+  padding: 20px 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.3);
+}
+
+.service-login .body h2 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin: 0 0 1em;
+  line-height: 1.2;
+  color: #003055;
+}
+
+.service-login .body p {
+  line-height: 1.8;
+  margin: 0 0 1em;
+}
+
+.service-login .body p a {
+  color: #1693c0;
+}
+
+.service-login .body .btn {
+  font-size: 0.875em;
+  font-weight: 600;
+  line-height: 38px;
+  padding: 8px 16px;
+}
+
+.service-login .body .google-btn-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.service-login .body .google-login-icon {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background: url("../images/icgc/icon-google.svg");
+  margin: 0 12px 0 0;
+}
+
+.service-login .body span {
+  display: inline-block;
+}
+
+.service-login .footer {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0 0;
+}
+
+.service-login .footer img {
+  display: block;
+  max-width: 48%;
+  height: auto;
+}
+
+/* Responsive - Tablet and Above */
+@media (min-width: 786px) {
+  #login-main .service-login {
+    padding: 30px;
+  }
+
+  .service-login .header {
+    padding: 5px 0 30px;
+  }
+
+  .service-login .body {
+    padding: 50px;
+  }
+
+  .service-login .body h2 {
+    font-size: 1.875em;
+  }
+
+  .service-login .body p {
+    font-size: 1.25em;
+    margin: 0 0 2em;
+  }
+
+  .service-login .body .btn {
+    font-size: 1.125em;
+    padding: 10px 21px;
+  }
+}
