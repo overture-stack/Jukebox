@@ -1,5 +1,5 @@
 # OpenStack Settings
-openstack_secrets: "~/secrets/openstack_secrets.yml" 
+openstack_secrets: "<secrets file path goes here>" # eg. ~/secrets/openstack_secrets.yml
 #login_username: '' # set this in your openstack_secrets file
 #login_password: '' # set this in your openstack_secrets file
 openstack_server: "<Your openstack server hostname goes here>"

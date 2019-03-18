@@ -9,8 +9,7 @@ compose_project_name: "{{ service_name }}"
 container_name: "jupyterhub"
 
 # Docker image tags
-#repo: "icgcdcc/jukebox"
-repo: "kevinhartmann/jukebox"
+repo: "icgcdcc/jukebox"
 notebook_image: "{{ repo }}:notebook-latest"
 create_volume_image: "{{ repo }}:create_volume-latest"
 jupyterhub_image: "{{ repo }}:jupyterhub-latest"
