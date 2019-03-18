@@ -1,0 +1,5 @@
+FROM jupyter/all-spark-notebook 
+MAINTAINER ICGC <dcc-support@icgc.org>
+ARG JUPYTERHUB_VERSION
+RUN pip install --upgrade pip
+RUN pip install --no-cache jupyterhub

@@ -6,14 +6,12 @@ service_dir: "/srv/jupyterhub"
 
 # mount point for docker volume to persist the user data between reboots
 data_mount_point: /data
-# mount point to drop files into docker image during development
 share_mount: "{{ service_dir }}/share"
-# mount point for config file 
-config_mount: "{{ service_dir }}/config"
 
-ssl_key: "privkey.pem"
+ssl_mount: "{{ service_dir }}/ssl"
+
+ssl_key: "key.pem"
 ssl_cert: "cert.pem"
-use_daco: "true"
 
 # where to find the logo image
 logo_path: "{{ service_dir }}/www_custom/hub/logo"

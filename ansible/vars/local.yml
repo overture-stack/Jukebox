@@ -14,4 +14,4 @@ use_certbot: false
 use_oauth: false
 
 # We don't need to mount anything special for ssl 
-config: ""
+ssl: ""
