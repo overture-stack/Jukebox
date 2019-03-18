@@ -1,0 +1,4 @@
+#!/bin/sh
+cd {{ build_dir }}/notebook
+docker build -t {{notebook_image}} .
+docker run -v "{{opt_volume}}:/opt" {{create_volume_image}} /bin/bash

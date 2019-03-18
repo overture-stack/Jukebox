@@ -20,8 +20,8 @@ jukebox_service_name: "{{ service_name }}"
 # where to install Jukebox (default = inside Jukebox's home directory)
 home: "/home/{{jukebox_user}}"
 
-# Add this ssl mount configuration to our docker-compose file 
-ssl: "- {{ ssl_dir }}:{{ ssl_mount }}"
+# Add this config mount configuration to our docker-compose file 
+config: "- {{ config_dir }}:{{ config_mount }}"
 
 isLocal: false
 # or we wouldn't be deploying it as a remote system, would we?

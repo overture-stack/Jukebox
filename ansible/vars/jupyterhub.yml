@@ -4,14 +4,22 @@ jupyterhub_version: 0.8
 # Paths used by jupyterhub within it's docker container
 service_dir: "/srv/jupyterhub"	
 
+# Path to the python library jupyterhub is using 
+python_lib: "/opt/conda/lib/python3.6/site-packages"
+
+# Path to jupyterhub web content within container
+hub_dir: "/opt/conda/share/jupyterhub/"
+
 # mount point for docker volume to persist the user data between reboots
 data_mount_point: /data
+# mount point to drop files into docker image during development
 share_mount: "{{ service_dir }}/share"
+# mount point for config file 
+config_mount: "{{ service_dir }}/config"
 
-ssl_mount: "{{ service_dir }}/ssl"
-
-ssl_key: "key.pem"
+ssl_key: "privkey.pem"
 ssl_cert: "cert.pem"
+use_daco: "true"
 
 # where to find the logo image
 logo_path: "{{ service_dir }}/www_custom/hub/logo"

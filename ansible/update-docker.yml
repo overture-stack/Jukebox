@@ -1,0 +1,4 @@
+# Copyright 2018-2019(c) The Ontario Institute for Cancer Research. All rights reserved.
+# Just run the plays to set up the directories and pull the new docker images
+- import_playbook: tasks/build_jupyterhub.yml group=jukebox
+- import_playbook: tasks/build_notebook.yml group=jukebox

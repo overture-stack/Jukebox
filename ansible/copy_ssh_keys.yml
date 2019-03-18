@@ -1,0 +1,2 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+- import_playbook: tasks/copy_ssh_keys.yml group=jukebox

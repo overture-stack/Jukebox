@@ -1,0 +1,7 @@
+# DACO (http://http://icgc.org/daco) authentication 
+daco_secrets: ~/secrets/daco.yml
+daco_base_url: 'https://icgc.org/ud_oauth/1/search'
+daco_client_key:    '' # set in secrets file
+daco_client_secret: '' # set this in secrets file
+daco_token: ''         # set this in secrets file
+daco_token_secret: ''  # set this in secrets file
