@@ -1,7 +1,7 @@
 import os
 c = get_config()
 c.JupyterHub.spawner_class = 'dockerspawner.DockerSpawner'
-c.DockerSpawner.container_image = "{{ notebook_image }}"
+c.DockerSpawner.image = "{{ notebook_image }}"
 
 spawn_cmd = "{{ docker_spawn_cmd }}"
 c.DockerSpawner.extra_create_kwargs.update({ 'command': spawn_cmd }) 
@@ -17,8 +17,6 @@ c.DockerSpawner.network_name = network_name
 
 # Pass the network name as argument to spawned containers
 c.DockerSpawner.extra_host_config.update({ 'network_mode': network_name, 'devices': ['/dev/fuse:/dev/fuse:rwm'], 'cap_add': ['SYS_ADMIN'], 'security_opt': ['apparmor=unconfined'] })
-notebook_dir = "{{ docker_notebook_dir }}"
-c.DockerSpawner.notebook_dir = notebook_dir
 c.DockerSpawner.links={network_name: network_name}
 
 # Mount the real user's Docker volume on the host to the notebook user's
@@ -44,8 +42,8 @@ c.JupyterHub.cookie_secret_file = os.path.join(data_dir,
     'jupyterhub_cookie_secret')
 
 # Set up our SSL configuration information
-c.JupyterHub.ssl_key = "{{ ssl_mount }}/{{ ssl_key }}"
-c.JupyterHub.ssl_cert = "{{ ssl_mount }}/{{ ssl_cert }}"
+c.JupyterHub.ssl_key = "{{ config_mount }}/{{ ssl_key }}"
+c.JupyterHub.ssl_cert = "{{ config_mount }}/{{ ssl_cert }}"
 
 use_oauth="{{ use_oauth }}"
 c.JupyterHub.admin_access = False 

@@ -1,0 +1,17 @@
+# Copyright 2018(c) The Ontario Institute for Cancer Research. All rights reserved.
+- name: Deploy and Install Jukebox Service 
+  hosts: "{{ group }}" 
+  vars_files:
+    - "../vars/main.yml"
+    - "../vars/docker.yml"
+    - "../vars/jukebox.yml"
+    - "../vars/deploy.yml"
+    - "../vars/jupyterhub.yml"
+    - "../vars/jupyter_notebook.yml"
+    - "../vars/certbot.yml"
+    - "../vars/oauth.yml"
+    - "{{ oauth_secrets }}"
+  roles: 
+    - "../roles/jupyterhub"
+  become: true
+  become_user: "{{ jukebox_user }}"

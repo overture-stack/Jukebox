@@ -22,17 +22,15 @@
 - name: Run certbot to create a SSL certificate for our server 
   become: true
   become_user: root
-  shell: "certbot certonly -d {{ host }} --agree-tos --email {{ certbot_email }} --standalone -q"
-  args:
-    creates: "{{ certbot_cert }}" 
+  shell: "test -d {{ certbot_dir }} || certbot certonly -d {{ host }} --agree-tos --email {{ certbot_email }} --standalone -q"
   ignore_errors: true
 
-- name: Grant jukebox group permission to find the certs
+- name: Create our config dir if it doesn't exist
+  become: true
+  become_user: "{{ jukebox_user }}"
+  shell: "test -d {{ config_dir }} || mkdir {{ config_dir }}"
+
+- name: Copy the certificates into our config dir 
   become: true
   become_user: root
-  file:
-    path: "/etc/letsencrypt/{{ item }}"
-    group: "{{ jukebox_group }}"
-    mode: "g+x"
-  with_items: [ live, archive ]
-  ignore_errors: true
+  shell: "cp {{ certbot_dir }}/*.pem {{ config_dir }}"
