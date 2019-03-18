@@ -1,5 +1,5 @@
 [jukebox]
-test-jupyter
+test-jupyterhub
 
 [jukebox:vars]
 host=test-jupyterhub.cancercollaboratory.org

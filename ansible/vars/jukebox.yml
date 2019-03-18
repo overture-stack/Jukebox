@@ -1,5 +1,5 @@
-# Where to put install the SSL certificates for the site 
-ssl_dir: "{{ home }}/ssl"
+# Where to put install the SSL certificates and configuration file 
+config_dir: "{{ home }}/config"
 
 # The shared directory to mount to transfer files into/out of the JupyterHub
 # container when customizing the look & feel  

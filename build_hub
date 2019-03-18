@@ -1,0 +1,2 @@
+#!/bin/bash
+docker build --build-arg="JUPYTERHUB_VERSION=0.8" --build-arg="USE_OAUTH=true" --build-arg="USE_CERTBOT=true" --build-arg="SERVICE_DIR=/srv/jupyterhub" --build-arg="CERT=cert.pem" --build-arg="SSL_DIR=/srv/jupyterhub/ssl" --build-arg="KEY=key.pem" --build-arg="PYTHON_LIB=/opt/conda/lib/python3.6/site-packages" --build-arg="HUB_DIR=/opt/conda/share/jupyterhub/" -t jupyterhub .

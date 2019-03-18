@@ -9,9 +9,10 @@ compose_project_name: "{{ service_name }}"
 container_name: "jupyterhub"
 
 # Docker image tags
-notebook_image: "notebook"
-create_volume_image: "create_volume"
-jupyterhub_image: "jupyterhub"
+repo: "icgcdcc/jukebox"
+notebook_image: "{{ repo }}:notebook-latest"
+create_volume_image: "{{ repo }}:create_volume-latest"
+jupyterhub_image: "{{ repo }}:jupyterhub-latest"
 
 # Name of docker volume that contains the user data
 data_volume: "{{ service_name }}-data"
