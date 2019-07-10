@@ -1,0 +1,6 @@
+# /etc/cron.d/jupyterhub: crontab entries for the jupyerhub service 
+#
+# Certbot checks for renewal twice a day, so check for modified ssl files twice/day, at the half-hour mark to give certbot lots of time to finish it's job.
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+30 */12 * * * root /usr/bin/test "{{ certbot_cert }}" -nt "{{ ssl_dir }}/cert.pem" && /bin/cp "{{ certbot_cert }}" "{{ ssl_dir }}/cert.pem" && /bin/cp "{{ certbot_key}}" "{{ ssl_dir }}/privkey.pem" && /bin/chown jupyterhub "{{ ssl_dir }}/*" && service {{ service_name }} restart
